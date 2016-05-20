@@ -23,7 +23,7 @@ requirements:
     - numpy x.x
     - jpeg 9*
     - libtiff 4.0.*
-    - libpng 1.6*
+    - libpng 1.6.17
     - fftw
     - hdf5 1.8.15*
     - boost 1.60.*
@@ -34,7 +34,7 @@ requirements:
     - numpy x.x
     - jpeg 9*
     - libtiff 4.0.*
-    - libpng 1.6*
+    - libpng 1.6.17
     - fftw
     - hdf5 1.8.15*
     - boost 1.60.*
