@@ -28,7 +28,7 @@ requirements:
     - jpeg 9*
     - libtiff 4.0.*
     - libpng 1.6*
-    - fftw
+    - fftw                  # [unix]
     - hdf5 1.8.18|1.8.18.*
     - boost 1.64.*
     - zlib 1.2.*
@@ -39,7 +39,7 @@ requirements:
     - jpeg 9*
     - libtiff 4.0.*
     - libpng 1.6*
-    - fftw
+    - fftw                  # [unix]
     - hdf5 1.8.18|1.8.18.*
     - boost 1.64.*
     - zlib 1.2.*
