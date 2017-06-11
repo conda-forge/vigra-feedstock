@@ -17,7 +17,7 @@ cmake .. ^
         -DCMAKE_PREFIX_PATH="%LIBRARY_PREFIX%" ^
         -DCMAKE_INSTALL_PREFIX="%LIBRARY_PREFIX%" ^
         -DCMAKE_CXX_FLAGS="%CXXFLAGS% -DH5_BUILT_AS_DYNAMIC_LIB /EHsc" ^
-        -DCMAKE_CXX_STANDARD="11" ^
+        -DCMAKE_CXX_STANDARD="14" ^
         "%SRC_DIR%"
 if errorlevel 1 exit 1
 
