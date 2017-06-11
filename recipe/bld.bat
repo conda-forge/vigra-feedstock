@@ -1,4 +1,6 @@
-:: Patch Boost to fix an incorrect library name.
+:: Patch Boost to workaround a VS 2015 bug and fix an incorrect library name.
+copy "%RECIPE_DIR%\boost\include\boost\get_pointer.hpp" "%LIBRARY_INC%\boost\get_pointer.hpp"
+if errorlevel 1 exit 1
 copy "%RECIPE_DIR%\boost\include\boost\python\detail\config.hpp" "%LIBRARY_INC%\boost\python\detail\config.hpp"
 if errorlevel 1 exit 1
 copy "%RECIPE_DIR%\boost\include\boost\python\numpy\config.hpp" "%LIBRARY_INC%\boost\python\numpy\config.hpp"
