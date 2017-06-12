@@ -1,9 +1,3 @@
-:: Patch Boost to fix an incorrect library name.
-copy "%RECIPE_DIR%\boost\include\boost\python\detail\config.hpp" "%LIBRARY_INC%\boost\python\detail\config.hpp"
-if errorlevel 1 exit 1
-copy "%RECIPE_DIR%\boost\include\boost\python\numpy\config.hpp" "%LIBRARY_INC%\boost\python\numpy\config.hpp"
-if errorlevel 1 exit 1
-
 set CMAKE_CONFIG=Release
 if errorlevel 1 exit 1
 
