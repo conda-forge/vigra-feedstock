@@ -1,6 +1,3 @@
-set CMAKE_BUILD_TYPE=Release
-if errorlevel 1 exit 1
-
 mkdir build
 if errorlevel 1 exit 1
 
@@ -9,7 +6,7 @@ if errorlevel 1 exit 1
 
 cmake .. ^
         -G "NMake Makefiles" ^
-        -DCMAKE_BUILD_TYPE="%CMAKE_BUILD_TYPE%" ^
+        -DCMAKE_BUILD_TYPE="Release" ^
         -DCMAKE_PREFIX_PATH="%LIBRARY_PREFIX%" ^
         -DCMAKE_INSTALL_PREFIX="%LIBRARY_PREFIX%" ^
         -DBUILD_SHARED_LIBS=1 ^
