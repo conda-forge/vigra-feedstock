@@ -1,10 +1,10 @@
 set CMAKE_CONFIG=Release
 if errorlevel 1 exit 1
 
-mkdir build_%CMAKE_CONFIG%
+mkdir build
 if errorlevel 1 exit 1
 
-cd build_%CMAKE_CONFIG%
+cd build
 if errorlevel 1 exit 1
 
 cmake .. ^
