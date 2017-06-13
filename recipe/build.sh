@@ -61,7 +61,7 @@ cmake ..\
         -DJPEG_LIBRARY=${PREFIX}/lib/libjpeg${SHLIB_EXT} \
         ${EXTRA_CMAKE_ARGS}
 
-make
+make -j${CPU_COUNT}
 # Can't run tests due to a bug in the clang compiler provided with XCode.
 # For more details see here ( https://llvm.org/bugs/show_bug.cgi?id=21083 ).
 # Also, these tests are very intensive, which makes them challenging to run in CI.
