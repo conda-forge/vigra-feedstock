@@ -12,6 +12,8 @@ source:
   patches:
     # Workaround for VS 2015
     - PR_412.diff
+    # Fix Windows tests
+    - win_test.diff
 
 build:
   skip: true  # [win and py<35]
