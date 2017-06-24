@@ -10,9 +10,18 @@ source:
   url: https://github.com/ukoethe/vigra/archive/{{ version_tag }}.tar.gz
   sha1: 518c7a9ef0e26e39563aeebf22bcee55a7d257c8
   patches:
-    # Workaround for VS 2015
+    ####################################################
+    # Workaround for VS 2015                           #
+    #                                                  #
+    # xref: https://github.com/ukoethe/vigra/pull/412  #
+    ####################################################
     - PR_412.diff
-    # Fix Windows tests
+
+    ####################################################
+    # Fix Windows Python test run                      #
+    #                                                  #
+    # xref: https://github.com/ukoethe/vigra/pull/416  #
+    ####################################################
     - PR_416.diff
 
 build:
