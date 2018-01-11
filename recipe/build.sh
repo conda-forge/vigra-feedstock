@@ -31,6 +31,7 @@ cmake ..\
 \
         -DWITH_VIGRANUMPY=TRUE \
         -DWITH_BOOST_THREAD=1 \
+        -DWITH_LEMON=1 \
         -DDEPENDENCY_SEARCH_PREFIX=${PREFIX} \
 \
         -DFFTW3F_INCLUDE_DIR=${PREFIX}/include \
