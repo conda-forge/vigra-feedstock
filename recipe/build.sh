@@ -44,6 +44,7 @@ cmake ..\
 \
         -DBoost_INCLUDE_DIR=${PREFIX}/include \
         -DBoost_LIBRARY_DIRS=${PREFIX}/lib \
+        -DBoost_PYTHON_LIBRARY=${PREFIX}/lib/libboost_python${CONDA_PY}${SHLIB_EXT} \
 \
         -DPYTHON_EXECUTABLE=${PYTHON} \
         -DPYTHON_INCLUDE_PATH=${PREFIX}/include \
