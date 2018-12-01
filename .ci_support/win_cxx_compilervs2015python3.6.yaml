@@ -7,7 +7,7 @@ channel_targets:
 cxx_compiler:
 - vs2015
 hdf5:
-- 1.10.3
+- 1.10.4
 jpeg:
 - '9'
 libpng:
@@ -18,8 +18,6 @@ numpy:
 - '1.11'
 pin_run_as_build:
   boost:
-    max_pin: x.x.x
-  hdf5:
     max_pin: x.x.x
   jpeg:
     max_pin: x
