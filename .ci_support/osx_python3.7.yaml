@@ -1,7 +1,7 @@
 MACOSX_DEPLOYMENT_TARGET:
 - '10.9'
 boost:
-- 1.68.0
+- 1.70.0
 channel_sources:
 - conda-forge,defaults
 channel_targets:
@@ -11,7 +11,7 @@ cxx_compiler:
 cxx_compiler_version:
 - '4'
 hdf5:
-- 1.10.4
+- 1.10.5
 jpeg:
 - '9'
 libpng:
@@ -23,7 +23,7 @@ macos_machine:
 macos_min_version:
 - '10.9'
 numpy:
-- '1.9'
+- '1.14'
 pin_run_as_build:
   boost:
     max_pin: x.x.x
