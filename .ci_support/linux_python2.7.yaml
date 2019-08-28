@@ -15,9 +15,9 @@ hdf5:
 jpeg:
 - '9'
 libpng:
-- 1.6.35
+- '1.6'
 libtiff:
-- 4.0.9
+- 4.0.10
 numpy:
 - '1.14'
 pin_run_as_build:
