@@ -8,12 +8,22 @@ then
 else
     export CXXFLAGS="-pthread ${CXXFLAGS}"
 fi
-if [[ ${PY3K} == 1 ]];
-then
-    EXTRA_CMAKE_ARGS="${EXTRA_CMAKE_ARGS} -DPYTHON_LIBRARIES=${PREFIX}/lib/libpython${PY_VER}m${SHLIB_EXT}"
-else
-    EXTRA_CMAKE_ARGS="${EXTRA_CMAKE_ARGS} -DPYTHON_LIBRARIES=${PREFIX}/lib/libpython${PY_VER}${SHLIB_EXT}"
+
+
+PYTHON_LIB="${PREFIX}/lib/libpython${PY_VER}${SHLIB_EXT}"
+
+# libpython might be named with an 'm' suffix
+# There's probably a smart way to make cmake find libpython for us, but this works for now.
+if [[ ! -e "${PYTHON_LIB}" ]]; then
+    PYTHON_LIB="${PREFIX}/lib/libpython${PY_VER}m${SHLIB_EXT}"
 fi
+
+if [[ ! -e "${PYTHON_LIB}" ]]; then
+    echo "*** recipe/build.sh: Can't find libpython ***" 2>&1
+    exit 1
+fi
+
+EXTRA_CMAKE_ARGS="${EXTRA_CMAKE_ARGS} -DPYTHON_LIBRARIES=${PYTHON_LIB}"
 export EXTRA_CMAKE_ARGS
 
 if [[ "${cxx_compiler}" == "toolchain_cxx" ]];
