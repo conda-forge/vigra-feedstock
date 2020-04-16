@@ -5,15 +5,11 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- gxx
-cxx_compiler_version:
-- '7'
-docker_image:
-- condaforge/linux-anvil-comp7
+- vs2017
 fftw:
 - '3'
 hdf5:
-- 1.10.5
+- 1.10.6
 jpeg:
 - '9'
 libpng:
@@ -39,6 +35,6 @@ pin_run_as_build:
   zlib:
     max_pin: x.x
 python:
-- '2.7'
+- 3.6.* *_cpython
 zlib:
 - '1.2'
