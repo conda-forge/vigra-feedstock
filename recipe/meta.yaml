@@ -59,7 +59,7 @@ source:
 
 build:
   skip: true  # [win and py<35]
-  number: 1012
+  number: 1013
   detect_binary_files_with_prefix: true
 
 requirements:
