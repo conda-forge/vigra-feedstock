@@ -59,7 +59,7 @@ source:
 
 build:
   skip: true  # [win and py<35]
-  number: 1021
+  number: 1022
   detect_binary_files_with_prefix: true
   run_exports:
     # Seems to change ABI between minor versions
