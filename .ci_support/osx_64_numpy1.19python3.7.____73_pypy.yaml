@@ -9,7 +9,7 @@ channel_targets:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '10'
+- '11'
 fftw:
 - '3'
 hdf5:
@@ -19,13 +19,13 @@ jpeg:
 libpng:
 - '1.6'
 libtiff:
-- 4.1.0
+- '4'
 macos_machine:
 - x86_64-apple-darwin13.4.0
 numpy:
-- '1.16'
+- '1.19'
 openexr:
-- 2.5.1
+- '2.5'
 pin_run_as_build:
   boost:
     max_pin: x.x.x
@@ -43,11 +43,11 @@ pin_run_as_build:
   zlib:
     max_pin: x.x
 python:
-- 3.7.* *_cpython
+- 3.7.* *_73_pypy
 target_platform:
 - osx-64
 zip_keys:
-- - numpy
-  - python
+- - python
+  - numpy
 zlib:
 - '1.2'

@@ -1,11 +1,17 @@
 boost:
-- 1.72.0
+- 1.74.0
+cdt_name:
+- cos6
 channel_sources:
 - conda-forge,defaults
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- vs2017
+- gxx
+cxx_compiler_version:
+- '9'
+docker_image:
+- quay.io/condaforge/linux-anvil-comp7
 fftw:
 - '3'
 hdf5:
@@ -15,11 +21,11 @@ jpeg:
 libpng:
 - '1.6'
 libtiff:
-- 4.1.0
+- '4'
 numpy:
 - '1.16'
 openexr:
-- 2.5.1
+- '2.5'
 pin_run_as_build:
   boost:
     max_pin: x.x.x
@@ -37,11 +43,13 @@ pin_run_as_build:
   zlib:
     max_pin: x.x
 python:
-- 3.8.* *_cpython
+- 3.6.* *_cpython
 target_platform:
-- win-64
+- linux-64
 zip_keys:
-- - numpy
-  - python
+- - cdt_name
+  - docker_image
+- - python
+  - numpy
 zlib:
 - '1.2'
