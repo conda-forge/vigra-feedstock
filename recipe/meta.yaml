@@ -30,6 +30,7 @@ source:
     # xref: https://github.com/ukoethe/vigra/pull/417        #
     ##########################################################
     - PR_417.diff
+    - pypy_support.diff
 
     ##########################################################
     # Fix CMake obsolete policy CMP0026 warning              #

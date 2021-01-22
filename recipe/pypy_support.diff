@@ -1,0 +1,19 @@
+index 77597ba..be55a0e 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1,4 +1,4 @@
+-cmake_minimum_required(VERSION 2.6)
++cmake_minimum_required(VERSION 3.12)
+ 
+ ##################################################
+ #
+@@ -121,7 +121,7 @@ ENDIF()
+ SET(DOXYGEN_SKIP_DOT TRUE)
+ FIND_PACKAGE(Doxygen)
+ 
+-FIND_PACKAGE(PythonInterp ${PYTHON_VERSION})
++FIND_PACKAGE(Python COMPONENTS Interpreter Development)
+ 
+ ##################################################
+ #
+
