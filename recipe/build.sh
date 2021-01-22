@@ -8,21 +8,6 @@ else
     export CXXFLAGS="-pthread ${CXXFLAGS}"
 fi
 
-
-PYTHON_LIB="${PREFIX}/lib/libpython${PY_VER}${SHLIB_EXT}"
-
-# libpython might be named with an 'm' suffix
-# There's probably a smart way to make cmake find libpython for us, but this works for now.
-if [[ ! -e "${PYTHON_LIB}" ]]; then
-    PYTHON_LIB="${PREFIX}/lib/libpython${PY_VER}m${SHLIB_EXT}"
-fi
-
-if [[ ! -e "${PYTHON_LIB}" ]]; then
-    echo "*** recipe/build.sh: Can't find libpython ***" 2>&1
-    exit 1
-fi
-
-EXTRA_CMAKE_ARGS="${EXTRA_CMAKE_ARGS} -DPYTHON_LIBRARIES=${PYTHON_LIB}"
 export EXTRA_CMAKE_ARGS
 
 if [[ "${cxx_compiler}" == "toolchain_cxx" ]];
@@ -63,9 +48,6 @@ cmake ..\
         -DBoost_INCLUDE_DIR=${PREFIX}/include \
         -DBoost_LIBRARY_DIRS=${PREFIX}/lib \
         -DBoost_PYTHON_LIBRARY=${PREFIX}/lib/libboost_python${CONDA_PY}${SHLIB_EXT} \
-\
-        -DPYTHON_EXECUTABLE=${PYTHON} \
-        -DPYTHON_INCLUDE_PATH=${PREFIX}/include \
 \
         -DZLIB_INCLUDE_DIR=${PREFIX}/include \
         -DZLIB_LIBRARY=${PREFIX}/lib/libz${SHLIB_EXT} \
