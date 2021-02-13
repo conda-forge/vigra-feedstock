@@ -60,7 +60,7 @@ source:
     - more_informative_error.patch
     - add_boost_python_major_mior.patch
     # https://github.com/ukoethe/vigra/pull/485
-    - pypy_support.diff
+    - 485_pypy_support.patch
 
     # On master on vigra, but after 1.11.1, no release since
     - remove-obsolete-h5py.highlevel.patch
@@ -86,7 +86,7 @@ source:
 
 
 build:
-  number: 1028
+  number: 1029
   detect_binary_files_with_prefix: true
   run_exports:
     # Seems to change ABI between minor versions
