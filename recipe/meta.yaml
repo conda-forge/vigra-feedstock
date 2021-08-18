@@ -69,7 +69,7 @@ source:
     - ignore_libpython_macos.diff
 
 build:
-  number: 1023
+  number: 1024
   detect_binary_files_with_prefix: true
   run_exports:
     # Seems to change ABI between minor versions
