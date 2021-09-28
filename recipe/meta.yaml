@@ -10,7 +10,6 @@ source:
   url: https://github.com/ukoethe/vigra/archive/{{ version_tag }}.tar.gz
   sha1: 518c7a9ef0e26e39563aeebf22bcee55a7d257c8
   patches:
-
     ##########################################################
     # Workaround for VS 2015                                 #
     #                                                        #
@@ -67,6 +66,10 @@ source:
     # Interpreter is statically linked on macOS so do not use `libpython`.  #
     #########################################################################
     - ignore_libpython_macos.diff
+    # HDF5 1.10 to 1.12 compatibility
+    # https://portal.hdfgroup.org/display/HDF5/Migrating+from+HDF5+1.10+to+HDF5+1.12
+    # https://github.com/ukoethe/vigra/pull/499
+    - 499-hdf5_1_12.patch
 
 build:
   number: 1024
