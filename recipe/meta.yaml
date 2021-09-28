@@ -66,6 +66,9 @@ source:
     # Interpreter is statically linked on macOS so do not use `libpython`.  #
     #########################################################################
     - ignore_libpython_macos.diff
+    # HDF5 1.10 to 1.12 compatibility
+    # https://portal.hdfgroup.org/display/HDF5/Migrating+from+HDF5+1.10+to+HDF5+1.12
+    - hdf5_1_12.patch
 
 build:
   number: 1024
