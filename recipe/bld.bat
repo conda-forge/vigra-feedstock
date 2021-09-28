@@ -4,6 +4,8 @@ if errorlevel 1 exit 1
 cd build
 if errorlevel 1 exit 1
 
+set CXXFLAGS="%CXXFLAGS% -DH5_USE_110_API"
+
 cmake .. ^
         -G "NMake Makefiles" ^
         -DCMAKE_BUILD_TYPE="Release" ^

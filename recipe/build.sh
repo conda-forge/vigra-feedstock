@@ -18,6 +18,7 @@ fi
 # In release mode, we use -O2 because gcc is known to miscompile certain vigra functionality at the O3 level.
 # (This is probably due to inappropriate use of undefined behavior in vigra itself.)
 export CXXFLAGS="-O2 -DNDEBUG ${CXXFLAGS}"
+export CXXFLAGS="${CXXFLAGS} -DH5_USE_110_API"
 
 # Configure
 mkdir build
