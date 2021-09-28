@@ -10,7 +10,6 @@ source:
   url: https://github.com/ukoethe/vigra/archive/{{ version_tag }}.tar.gz
   sha1: 518c7a9ef0e26e39563aeebf22bcee55a7d257c8
   patches:
-
     ##########################################################
     # Workaround for VS 2015                                 #
     #                                                        #
