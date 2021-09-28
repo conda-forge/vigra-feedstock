@@ -44,6 +44,7 @@ cmake ..\
         -DHDF5_CORE_LIBRARY=${PREFIX}/lib/libhdf5${SHLIB_EXT} \
         -DHDF5_HL_LIBRARY=${PREFIX}/lib/libhdf5_hl${SHLIB_EXT} \
         -DHDF5_INCLUDE_DIR=${PREFIX}/include \
+        -DCMAKE_C_FLAGS="-DH5_USE_110_API" \
 \
         -DBoost_INCLUDE_DIR=${PREFIX}/include \
         -DBoost_LIBRARY_DIRS=${PREFIX}/lib \
