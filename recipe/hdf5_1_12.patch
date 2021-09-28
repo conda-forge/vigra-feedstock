@@ -7,7 +7,7 @@ index 2c68342e..682e0126 100644
      // get information about object
      H5O_info_t infobuf;
 -    H5Oget_info_by_name(loc_id, name, &infobuf, H5P_DEFAULT);
-+    H5Oget_info_by_name(loc_id, name, &infobuf, H5O_INFO_BASIC, H5P_DEFAULT);
++    H5Oget_info_by_name1(loc_id, name, &infobuf, H5P_DEFAULT);
      return infobuf.type;
  }
  
