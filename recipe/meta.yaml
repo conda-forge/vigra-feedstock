@@ -76,7 +76,7 @@ source:
     - PR_500.diff
 
 build:
-  number: 1024
+  number: 1025
   detect_binary_files_with_prefix: true
   run_exports:
     # Seems to change ABI between minor versions
