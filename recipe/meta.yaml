@@ -71,6 +71,10 @@ source:
     # https://github.com/ukoethe/vigra/pull/499
     - 499-hdf5_1_12.patch
 
+    # replace deprecated bind1st and bind2nd with bind to enable build with cpp17
+    # xref: https://github.com/ukoethe/vigra/pull/500
+    - PR_500.diff
+
 build:
   number: 1024
   detect_binary_files_with_prefix: true
