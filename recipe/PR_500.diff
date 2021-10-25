@@ -1,8 +1,9 @@
 From 257084d845d20795a68e8d2591b83628da766976 Mon Sep 17 00:00:00 2001
 From: Constantin Pape <c.pape@gmx.net>
 Date: Sat, 16 Oct 2021 11:56:01 +0200
-Subject: [PATCH] Replace bind1st and bind2nd by bind
+Subject: [PATCH 1/2] Replace bind1st and bind2nd by bind
 
+Signed-off-by: Constantin Pape <c.pape@gmx.net>
 ---
  include/vigra/fftw3.hxx                       |  4 +--
  include/vigra/functorexpression.hxx           |  2 +-
@@ -373,6 +374,34 @@ index 96c72e61..87ef198c 100644
          
          std::auto_ptr<Image> image0(image0_->shallowCopy());
          should(equal(*image0, *image0_));
+-- 
+2.25.1
+
+
+From 8da122a26bd8952e9c66328583442f99f445f072 Mon Sep 17 00:00:00 2001
+From: Constantin Pape <c.pape@gmx.net>
+Date: Mon, 25 Oct 2021 20:13:51 +0200
+Subject: [PATCH 2/2] Remove deprecated binder1st and binder2nd form
+ functortraits
+
+Signed-off-by: Constantin Pape <c.pape@gmx.net>
+---
+ include/vigra/functortraits.hxx | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/include/vigra/functortraits.hxx b/include/vigra/functortraits.hxx
+index 175ffbfa..63a77308 100644
+--- a/include/vigra/functortraits.hxx
++++ b/include/vigra/functortraits.hxx
+@@ -195,8 +195,6 @@ VIGRA_DEFINE_STL_FUNCTOR(std::binary_negate, VigraFalseType, VigraTrueType)
+ VIGRA_DEFINE_STL_FUNCTOR(std::negate, VigraTrueType, VigraFalseType)
+ VIGRA_DEFINE_STL_FUNCTOR(std::logical_not, VigraTrueType, VigraFalseType)
+ VIGRA_DEFINE_STL_FUNCTOR(std::unary_negate, VigraTrueType, VigraFalseType)
+-VIGRA_DEFINE_STL_FUNCTOR(std::binder1st, VigraTrueType, VigraFalseType)
+-VIGRA_DEFINE_STL_FUNCTOR(std::binder2nd, VigraTrueType, VigraFalseType)
+ #undef VIGRA_DEFINE_STL_FUNCTOR
+ 
+ template <class R>
 -- 
 2.25.1
 
