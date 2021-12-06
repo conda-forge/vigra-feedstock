@@ -62,6 +62,9 @@ source:
     # https://github.com/ukoethe/vigra/pull/485
     - pypy_support.diff
 
+    # On master on vigra, but after 1.11.1, no release since
+    - remove-obsolete-h5py.highlevel.patch
+
     #########################################################################
     # Interpreter is statically linked on macOS so do not use `libpython`.  #
     #########################################################################
@@ -76,7 +79,7 @@ source:
     - PR_500.diff
 
 build:
-  number: 1026
+  number: 1027
   detect_binary_files_with_prefix: true
   run_exports:
     # Seems to change ABI between minor versions
@@ -87,6 +90,7 @@ requirements:
   build:
     - {{ compiler("cxx") }}
     - cmake
+    - make  # [unix]
   host:
     - python
     - nose
