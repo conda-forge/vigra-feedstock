@@ -78,6 +78,10 @@ source:
     # xref: https://github.com/ukoethe/vigra/pull/500
     - PR_500.diff
 
+    # fix deprecation of collections.Iterable
+    - fix-collections.Iterable-deprecation.patch
+
+
 build:
   number: 1028
   detect_binary_files_with_prefix: true
