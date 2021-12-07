@@ -81,6 +81,9 @@ source:
     # fix deprecation of collections.Iterable
     - fix-collections.Iterable-deprecation.patch
 
+    # fix dtypes with numpy>=1.20
+    - fix-numpy-1.20-build.patch
+
 
 build:
   number: 1028
