@@ -1,0 +1,22 @@
+From 076dbd61e8f9d8cd569972fcc724f3a69286b2e6 Mon Sep 17 00:00:00 2001
+From: k-dominik <k-dominik@users.noreply.github.com>
+Date: Wed, 5 Jan 2022 15:47:41 +0100
+Subject: [PATCH] insert vigraimpex into sys.path during test
+
+---
+ vigranumpy/test/set_paths.py.in | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/vigranumpy/test/set_paths.py.in b/vigranumpy/test/set_paths.py.in
+index 944eaaa2..0a7950ec 100644
+--- a/vigranumpy/test/set_paths.py.in
++++ b/vigranumpy/test/set_paths.py.in
+@@ -49,4 +49,5 @@ vigranumpytest_dir = re.sub('/Release$', outdir, r'$<TARGET_FILE_DIR:vigranumpyt
+ 
+ os.environ['PATH'] = os.pathsep.join([vigraimpex_dir.replace('/', os.sep), os.environ['PATH']])
+ sys.path.insert(0, r'@VIGRANUMPY_TMP_PATH@')
++sys.path.insert(0, vigraimpex_dir.replace('/', os.sep))
+ sys.path.insert(0, vigranumpytest_dir.replace('/', os.sep))
+-- 
+2.33.0
+

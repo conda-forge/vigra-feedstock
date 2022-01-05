@@ -84,6 +84,10 @@ source:
     # fix dtypes with numpy>=1.20
     - fix-numpy-1.20-build.patch
 
+    # add vigraimpex.dll path to sys.path during test-time
+    # seems necessary for python 3.10
+    - insert-vigraimpex-into-sys.path-during-test.patch
+
 
 build:
   number: 1028
