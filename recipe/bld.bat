@@ -21,8 +21,8 @@ if errorlevel 1 exit 1
 nmake
 if errorlevel 1 exit 1
 
-nmake check_python
+nmake install
 if errorlevel 1 exit 1
 
-nmake install
+nmake check_python
 if errorlevel 1 exit 1
