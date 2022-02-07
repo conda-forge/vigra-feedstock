@@ -84,6 +84,10 @@ source:
     # fix dtypes with numpy>=1.20
     - fix-numpy-1.20-build.patch
 
+    # Upstream this
+    # Fix cross compilation
+    - 0001-Remove-autodetection-code-for-cpp-version-since-it-i.patch
+
 
 build:
   number: 1028

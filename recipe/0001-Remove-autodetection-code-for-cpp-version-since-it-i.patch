@@ -1,0 +1,196 @@
+From 1d2b88d8acedf699718dfeaff09c283e56f9d85a Mon Sep 17 00:00:00 2001
+From: Mark Harfouche <mark.harfouche@gmail.com>
+Date: Mon, 7 Feb 2022 08:14:57 -0500
+Subject: [PATCH] Remove autodetection code for cpp version since it is 2022
+ and it doesn't play with well cross compilation
+
+---
+ CMakeLists.txt                      |   4 --
+ config/VIGRA_ADD_NUMPY_MODULE.cmake | 104 ----------------------------
+ config/output_cplusplus_version.cxx |  19 -----
+ test/multiarray/CMakeLists.txt      |  17 +----
+ 4 files changed, 1 insertion(+), 143 deletions(-)
+ delete mode 100644 config/VIGRA_ADD_NUMPY_MODULE.cmake
+ delete mode 100644 config/output_cplusplus_version.cxx
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 0d6a8c0e..791d2546 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -166,10 +166,6 @@ endif()
+ include(VigraDetectThreading)
+ include(VigraConfigureThreading)
+ 
+-# Should come after VigraDetectThreading, since that updates the -std flag.
+-include(VigraDetectCppVersion)
+-VIGRA_DETECT_CPP_VERSION()
+-
+ IF(WITH_VIGRANUMPY)
+     FIND_PACKAGE(VIGRANUMPY_DEPENDENCIES)
+ ENDIF()
+diff --git a/config/VIGRA_ADD_NUMPY_MODULE.cmake b/config/VIGRA_ADD_NUMPY_MODULE.cmake
+deleted file mode 100644
+index 50b23831..00000000
+--- a/config/VIGRA_ADD_NUMPY_MODULE.cmake
++++ /dev/null
+@@ -1,104 +0,0 @@
+-###################################################################
+-#
+-# VIGRA_ADD_NUMPY_MODULE: setup a module dependening on vigranumpy
+-#
+-# VIGRA_ADD_NUMPY_MODULE(modulename [SOURCES] source1.cpp, source2.cpp ...
+-#                                   [LIBRARIES dependency1 dependency2 ...]
+-#                                   [VIGANUMPY])
+-#
+-#        'modulename' is the module name to be used within Python (e.g. 'import modulename').
+-#        Unless 'VIGRANUMPY' is specified (see below), it is also the cmake target name.
+-#
+-#        SOURCE are the C++ sources of the module, LIBRARIES the necessary libraries.
+-#        Dependency syntax must conform to the requirements of the cmake command
+-#        TARGET_LINK_LIBRARIES. Modules are automatically linked against vigranumpycore
+-#        and its dependencies (libpython, boost_python), so it is not necessary to state
+-#        this dependency explicitly.
+-#
+-#        If VIGRANUMPY is given, the module is considered part of 'vigranumpy' and will
+-#        be compiled and installed along with the other vigranumpy modules (otherwise,
+-#        no installation target will be defined). The cmake target name becomes
+-#        'vigranumpy_modulename' in order to get useful alphabetic sorting of
+-#        targets in project files.
+-FUNCTION(VIGRA_ADD_NUMPY_MODULE target)
+-
+-    # parse the args
+-    set(v SOURCES)
+-    set(PART_OF_VIGRANUMPY 0)
+-    foreach(i ${ARGN})
+-        if(${i} MATCHES "^SOURCES$")
+-            set(v SOURCES)
+-        elseif(${i} MATCHES "^LIBRARIES$")
+-            set(v LIBRARIES)
+-        elseif(${i} MATCHES "^VIGRANUMPY$")
+-            set(PART_OF_VIGRANUMPY 1)
+-        else()
+-            set(${v} ${${v}} ${i})
+-        endif()
+-    endforeach(i)
+-
+-    IF(PART_OF_VIGRANUMPY)
+-        set(TARGET_NAME vigranumpy_${target})
+-        if(target MATCHES "^core$")
+-            set(LIBRARY_NAME vigranumpycore)
+-        else()
+-            set(LIBRARY_NAME ${target})
+-        endif()
+-    ELSE()
+-        set(TARGET_NAME ${target})
+-        set(LIBRARY_NAME ${target})
+-    ENDIF()
+-
+-    ADD_LIBRARY(${TARGET_NAME} SHARED ${SOURCES})
+-
+-    IF(PART_OF_VIGRANUMPY)
+-        ADD_DEPENDENCIES(vigranumpy ${TARGET_NAME})
+-
+-        # Store dependencies as a custom target property, so that we can
+-        # later query them.
+-        # TODO: Does cmake provide a standard way to query the dependencies?
+-        GET_TARGET_PROPERTY(VIGRANUMPY_DEPENDS vigranumpy VIGRA_DEPENDS)
+-        IF(NOT VIGRANUMPY_DEPENDS)
+-            set(VIGRANUMPY_DEPENDS "")
+-        ENDIF()
+-        SET_TARGET_PROPERTIES(vigranumpy PROPERTIES VIGRA_DEPENDS "${VIGRANUMPY_DEPENDS} ${TARGET_NAME}")
+-    ENDIF()
+-
+-    if(DEFINED LIBRARIES)
+-        TARGET_LINK_LIBRARIES(${TARGET_NAME} ${LIBRARIES})
+-    endif()
+-
+-    TARGET_LINK_LIBRARIES(${TARGET_NAME} ${VIGRANUMPY_LIBRARIES})
+-
+-    IF(PYTHON_PLATFORM MATCHES "^windows$")
+-        SET_TARGET_PROPERTIES(${TARGET_NAME} PROPERTIES OUTPUT_NAME "${LIBRARY_NAME}"
+-                                                           PREFIX "" SUFFIX  ".pyd")
+-    ELSEIF(MACOSX)
+-        IF(${CMAKE_MAJOR_VERSION} LESS 3)
+-            SET_TARGET_PROPERTIES(${TARGET_NAME} PROPERTIES OUTPUT_NAME "${LIBRARY_NAME}" PREFIX ""
+-                              SUFFIX ".so" INSTALL_NAME_DIR "${CMAKE_INSTALL_PREFIX}/${VIGRANUMPY_INSTALL_DIR}/vigra")
+-        ELSE()
+-            SET_TARGET_PROPERTIES(${TARGET_NAME} PROPERTIES OUTPUT_NAME "${LIBRARY_NAME}" PREFIX ""    SUFFIX ".so" )
+-        ENDIF()
+-    ELSE()
+-        SET_TARGET_PROPERTIES(${TARGET_NAME} PROPERTIES OUTPUT_NAME "${LIBRARY_NAME}"
+-                                                           PREFIX "")
+-    ENDIF()
+-
+-    IF(PART_OF_VIGRANUMPY)
+-        IF(PYTHON_PLATFORM MATCHES "^windows$")
+-            INSTALL(TARGETS ${TARGET_NAME} RUNTIME DESTINATION ${VIGRANUMPY_INSTALL_DIR}/vigra)
+-        ELSE()
+-            INSTALL(TARGETS ${TARGET_NAME}
+-                    LIBRARY DESTINATION ${VIGRANUMPY_INSTALL_DIR}/vigra)
+-        ENDIF()
+-
+-        # create a temporary vigranumpy installation in ${vigranumpy_tmp_dir}
+-        # (required for testing and documentation generation)
+-        ADD_CUSTOM_COMMAND(
+-            TARGET ${TARGET_NAME}
+-            POST_BUILD
+-            COMMAND ${CMAKE_COMMAND} ARGS -E copy_if_different $<TARGET_FILE:${TARGET_NAME}> ${vigranumpy_tmp_dir}/
+-            COMMENT "Copying target ${TARGET_NAME} to temporary module directory")
+-    ENDIF()
+-ENDFUNCTION(VIGRA_ADD_NUMPY_MODULE)
+diff --git a/config/output_cplusplus_version.cxx b/config/output_cplusplus_version.cxx
+deleted file mode 100644
+index d5a9e107..00000000
+--- a/config/output_cplusplus_version.cxx
++++ /dev/null
+@@ -1,19 +0,0 @@
+-#include <iostream>
+-
+-int main() {
+-    if (__cplusplus == 1)
+-    {
+-        // This is a workaround for a gcc bug:
+-        // http://stackoverflow.com/questions/7530047/gnu-c-macro-cplusplus-standard-conform
+-#ifdef __GXX_EXPERIMENTAL_CXX0X__
+-        std::cout << 201103;
+-#else
+-        std::cout << 199711;
+-#endif
+-    }
+-    else
+-    {
+-        std::cout << __cplusplus;
+-    }
+-    return 0;
+-}
+diff --git a/test/multiarray/CMakeLists.txt b/test/multiarray/CMakeLists.txt
+index 0d0cd1cf..506552e0 100644
+--- a/test/multiarray/CMakeLists.txt
++++ b/test/multiarray/CMakeLists.txt
+@@ -12,22 +12,7 @@ ENDIF(TIFF_FOUND)
+ 
+ FILE(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/impex)
+ 
+-# Check cpp version
+-if(NOT ${VIGRA_CPP_VERSION})
+-    message(FATAL_ERROR
+-            "cmake error: VIGRA_CPP_VERSION not defined yet. "
+-            "Call VIGRA_DETECT_CPP_VERSION() from the main CMakeLists file." )
+-endif()
+-
+-# multiarray/test.cxx uses 'auto' from c++11.
+-string(COMPARE LESS ${VIGRA_CPP_VERSION} "201103" NO_CXX11)
+-if(NO_CXX11 AND NOT MSVC) # Visual Studio 2010 and 2012 supports enough c++11 features that we can still use it
+-    MESSAGE(STATUS "** WARNING: You are compiling in C++98 mode.")
+-    MESSAGE(STATUS "**          Multiarray tests will be skipped.")
+-    MESSAGE(STATUS "**          Add -std=c++11 to CMAKE_CXX_FLAGS to enable multiarray tests.")
+-else()
+-    VIGRA_ADD_TEST(test_multiarray test.cxx LIBRARIES vigraimpex)
+-endif()
++VIGRA_ADD_TEST(test_multiarray test.cxx LIBRARIES vigraimpex)
+ 
+ # Even with C++11, a working threading implementation is needed for running multiarray_chunked tests.
+ VIGRA_CONFIGURE_THREADING()
+-- 
+2.32.0
+
