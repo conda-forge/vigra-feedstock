@@ -17,7 +17,7 @@ export CXXFLAGS="-O2 -DNDEBUG ${CXXFLAGS}"
 # Configure
 mkdir build
 cd build
-cmake ..\
+cmake ${CMAKE_ARGS} ..\
         -DCMAKE_INSTALL_PREFIX=${PREFIX} \
         -DCMAKE_PREFIX_PATH=${PREFIX} \
 \
@@ -67,4 +67,6 @@ make -j${CPU_COUNT} V=1 VERBOSE=1
 #eval ${LIBRARY_SEARCH_VAR}=$PREFIX/lib make check
 
 make install
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR}" != "" ]]; then
 make check_python
+fi
