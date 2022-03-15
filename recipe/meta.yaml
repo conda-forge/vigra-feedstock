@@ -109,7 +109,7 @@ requirements:
     - lemon
     - fftw
     - hdf5
-    - boost-cpp
+    - boost
     - zlib
 
   run:
