@@ -1,6 +1,6 @@
 MACOSX_DEPLOYMENT_TARGET:
 - '10.9'
-boost:
+boost_cpp:
 - 1.74.0
 channel_sources:
 - conda-forge
@@ -9,7 +9,7 @@ channel_targets:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '11'
+- '12'
 fftw:
 - '3'
 hdf5:
@@ -27,7 +27,7 @@ numpy:
 openexr:
 - '2.5'
 pin_run_as_build:
-  boost:
+  boost-cpp:
     max_pin: x.x.x
   fftw:
     max_pin: x
