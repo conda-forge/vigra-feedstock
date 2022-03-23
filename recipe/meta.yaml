@@ -88,6 +88,9 @@ source:
     # Fix cross compilation
     - 0001-Remove-autodetection-code-for-cpp-version-since-it-i.patch
 
+    # fix no conversion path error with clang by using explicit cast
+    - use-explicit-cast-operator-to-fix-clang-build.patch
+
 
 build:
   number: 1029
