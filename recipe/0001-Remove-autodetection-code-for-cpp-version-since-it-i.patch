@@ -1,0 +1,85 @@
+From 1d2b88d8acedf699718dfeaff09c283e56f9d85a Mon Sep 17 00:00:00 2001
+From: Mark Harfouche <mark.harfouche@gmail.com>
+Date: Mon, 7 Feb 2022 08:14:57 -0500
+Subject: [PATCH] Remove autodetection code for cpp version since it is 2022
+ and it doesn't play with well cross compilation
+
+---
+ CMakeLists.txt                      |  4 ----
+ config/output_cplusplus_version.cxx | 19 -------------------
+ test/multiarray/CMakeLists.txt      | 18 +-----------------
+ 3 files changed, 1 insertion(+), 40 deletions(-)
+ delete mode 100644 config/output_cplusplus_version.cxx
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index aa348f7..19264fa 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -166,10 +166,6 @@ endif()
+ include(VigraDetectThreading)
+ include(VigraConfigureThreading)
+ 
+-# Should come after VigraDetectThreading, since that updates the -std flag.
+-include(VigraDetectCppVersion)
+-VIGRA_DETECT_CPP_VERSION()
+-
+ IF(WITH_VIGRANUMPY)
+     FIND_PACKAGE(VIGRANUMPY_DEPENDENCIES)
+ ENDIF()
+diff --git a/config/output_cplusplus_version.cxx b/config/output_cplusplus_version.cxx
+deleted file mode 100644
+index d5a9e10..0000000
+--- a/config/output_cplusplus_version.cxx
++++ /dev/null
+@@ -1,19 +0,0 @@
+-#include <iostream>
+-
+-int main() {
+-    if (__cplusplus == 1)
+-    {
+-        // This is a workaround for a gcc bug:
+-        // http://stackoverflow.com/questions/7530047/gnu-c-macro-cplusplus-standard-conform
+-#ifdef __GXX_EXPERIMENTAL_CXX0X__
+-        std::cout << 201103;
+-#else
+-        std::cout << 199711;
+-#endif
+-    }
+-    else
+-    {
+-        std::cout << __cplusplus;
+-    }
+-    return 0;
+-}
+diff --git a/test/multiarray/CMakeLists.txt b/test/multiarray/CMakeLists.txt
+index 0d0cd1c..fd76704 100644
+--- a/test/multiarray/CMakeLists.txt
++++ b/test/multiarray/CMakeLists.txt
+@@ -11,23 +11,7 @@ IF(TIFF_FOUND)
+ ENDIF(TIFF_FOUND)
+ 
+ FILE(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/impex)
+-
+-# Check cpp version
+-if(NOT ${VIGRA_CPP_VERSION})
+-    message(FATAL_ERROR
+-            "cmake error: VIGRA_CPP_VERSION not defined yet. "
+-            "Call VIGRA_DETECT_CPP_VERSION() from the main CMakeLists file." )
+-endif()
+-
+-# multiarray/test.cxx uses 'auto' from c++11.
+-string(COMPARE LESS ${VIGRA_CPP_VERSION} "201103" NO_CXX11)
+-if(NO_CXX11 AND NOT MSVC) # Visual Studio 2010 and 2012 supports enough c++11 features that we can still use it
+-    MESSAGE(STATUS "** WARNING: You are compiling in C++98 mode.")
+-    MESSAGE(STATUS "**          Multiarray tests will be skipped.")
+-    MESSAGE(STATUS "**          Add -std=c++11 to CMAKE_CXX_FLAGS to enable multiarray tests.")
+-else()
+-    VIGRA_ADD_TEST(test_multiarray test.cxx LIBRARIES vigraimpex)
+-endif()
++VIGRA_ADD_TEST(test_multiarray test.cxx LIBRARIES vigraimpex)
+ 
+ # Even with C++11, a working threading implementation is needed for running multiarray_chunked tests.
+ VIGRA_CONFIGURE_THREADING()
+-- 
+2.32.0
+
