@@ -91,9 +91,13 @@ source:
     # fix no conversion path error with clang by using explicit cast
     - use-explicit-cast-operator-to-fix-clang-build.patch
 
+    # OpenEXR 3 Support
+    # https://src.fedoraproject.org/rpms/vigra/blob/rawhide/f/vigra-openexr3.patch
+    - vigra-openexr3.patch
+
 
 build:
-  number: 1030
+  number: 1031
   detect_binary_files_with_prefix: true
   run_exports:
     # Seems to change ABI between minor versions
