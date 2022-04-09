@@ -120,6 +120,7 @@ requirements:
     - libtiff
     - libpng
     - openexr
+    - imath
     - lemon
     - fftw
     - hdf5
