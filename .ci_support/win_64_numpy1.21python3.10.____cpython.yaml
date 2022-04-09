@@ -10,6 +10,8 @@ fftw:
 - '3'
 hdf5:
 - 1.12.1
+imath:
+- '3.1'
 jpeg:
 - '9'
 libpng:
