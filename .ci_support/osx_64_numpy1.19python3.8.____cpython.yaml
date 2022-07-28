@@ -9,11 +9,11 @@ channel_targets:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '12'
+- '13'
 fftw:
 - '3'
 hdf5:
-- 1.12.1
+- 1.12.2
 imath:
 - '3.1'
 jpeg:
