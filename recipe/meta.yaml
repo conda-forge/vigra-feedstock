@@ -98,6 +98,9 @@ source:
     # Ensure no warnings for integer comparsion with `is` in python
     - patches/PR_509.patch
 
+    # Avoid the use of deprecated types in libtiff
+    - patches/PR_510.patch
+
 
 build:
   number: 1033
