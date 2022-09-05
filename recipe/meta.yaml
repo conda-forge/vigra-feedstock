@@ -95,9 +95,13 @@ source:
     # https://src.fedoraproject.org/rpms/vigra/blob/rawhide/f/vigra-openexr3.patch
     - vigra-openexr3.patch
 
+    # fix non-tuple indexing of numpy arrays (which is deprecated/removed in numpy 1.23)
+    # https://github.com/ukoethe/vigra/pull/475
+    - PR_475.diff
+
 
 build:
-  number: 1033
+  number: 1034
   detect_binary_files_with_prefix: true
   run_exports:
     # Seems to change ABI between minor versions
