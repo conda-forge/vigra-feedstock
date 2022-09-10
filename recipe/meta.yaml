@@ -15,85 +15,97 @@ source:
     #                                                        #
     # xref: https://github.com/ukoethe/vigra/pull/412        #
     ##########################################################
-    - PR_412.diff
+    - patches/PR_412.diff
 
     ##########################################################
     # Fix incorrect template parameter in multi_convolution  #
     #                                                        #
     # xref: https://github.com/ukoethe/vigra/pull/415        #
     ##########################################################
-    - PR_415.diff
+    - patches/PR_415.diff
 
     ##########################################################
     # Fix Windows NMake Python test run                      #
     #                                                        #
     # xref: https://github.com/ukoethe/vigra/pull/417        #
     ##########################################################
-    - PR_417.diff
+    - patches/PR_417.diff
 
     ##########################################################
     # Fix CMake obsolete policy CMP0026 warning              #
     #                                                        #
     # xref: https://github.com/ukoethe/vigra/pull/449        #
     ##########################################################
-    - PR_449.diff
+    - patches/PR_449.diff
 
     ##########################################################
     # Handle Python 3.7 PyUnicode_AsUTF8 breaking change     #
     #                                                        #
     # xref: https://github.com/ukoethe/vigra/pull/451        #
     ##########################################################
-    - PR_451.diff
+    - patches/PR_451.diff
 
     ###########################################################################################
     # Backport patch to update exception declarations                                         #
     #                                                                                         #
     # xref: https://github.com/ukoethe/vigra/commit/dc730be49fc8def4304a651fa525e43b7754955e  #
     ###########################################################################################
-    - fix_except_decl.diff
+    - patches/fix_except_decl.diff
 
     # Added Sept 4 2020, but no new release since 2017
     # https://github.com/ukoethe/vigra/commit/aaaf44d240aebd0eb3539b6e105a19a984000d81
-    - gcc9_compatibility.patch
+    - patches/gcc9_compatibility.patch
 
     # These two patches are required to make pypy_support work
-    - more_informative_error.patch
-    - add_boost_python_major_mior.patch
+    - patches/more_informative_error.patch
+    - patches/add_boost_python_major_mior.patch
     # https://github.com/ukoethe/vigra/pull/485
-    - 485_pypy_support.patch
+    - patches/485_pypy_support.patch
 
     # On master on vigra, but after 1.11.1, no release since
-    - remove-obsolete-h5py.highlevel.patch
+    - patches/remove-obsolete-h5py.highlevel.patch
 
     #########################################################################
     # Interpreter is statically linked on macOS so do not use `libpython`.  #
     #########################################################################
-    - ignore_libpython_macos.diff
-    # HDF5 1.10 to 1.12 compatibility
+    - patches/ignore_libpython_macos.diff
+    # patches/HDF5 1.10 to 1.12 compatibility
     # https://portal.hdfgroup.org/display/HDF5/Migrating+from+HDF5+1.10+to+HDF5+1.12
     # https://github.com/ukoethe/vigra/pull/499
-    - 499-hdf5_1_12.patch
+    - patches/499-hdf5_1_12.patch
 
     # replace deprecated bind1st and bind2nd with bind to enable build with cpp17
     # xref: https://github.com/ukoethe/vigra/pull/500
-    - PR_500.diff
+    - patches/PR_500.diff
 
     # fix deprecation of collections.Iterable
-    - fix-collections.Iterable-deprecation.patch
+    - patches/fix-collections.Iterable-deprecation.patch
 
     # fix dtypes with numpy>=1.20
-    - fix-numpy-1.20-build.patch
+    - patches/fix-numpy-1.20-build.patch
 
     # Upstream this
     # Fix cross compilation
-    - 0001-Remove-autodetection-code-for-cpp-version-since-it-i.patch
+    - patches/0001-Remove-autodetection-code-for-cpp-version-since-it-i.patch
 
     # fix no conversion path error with clang by using explicit cast
-    - use-explicit-cast-operator-to-fix-clang-build.patch
+    - patches/use-explicit-cast-operator-to-fix-clang-build.patch
 
     # OpenEXR 3 Support
     # https://src.fedoraproject.org/rpms/vigra/blob/rawhide/f/vigra-openexr3.patch
-    - vigra-openexr3.patch
+    - patches/vigra-openexr3.patch
+
+    # Ensure no warnings for integer comparsion with `is` in python
+    - patches/PR_509.patch
+
+    # Avoid the use of deprecated types in libtiff
+    - patches/PR_510.patch
+
+    # Tuple indexing -- https://github.com/ukoethe/vigra/pull/475
+    - patches/PR_475.patch
+
+    # C++17/C++20 Compatibility -- https://github.com/ukoethe/vigra/pull/511
+    - patches/PR_511.patch
 
 
 build:
