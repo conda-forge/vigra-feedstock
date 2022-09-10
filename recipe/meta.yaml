@@ -101,6 +101,12 @@ source:
     # Avoid the use of deprecated types in libtiff
     - patches/PR_510.patch
 
+    # Tuple indexing -- https://github.com/ukoethe/vigra/pull/475
+    - patches/PR_475.patch
+
+    # C++17/C++20 Compatibility -- https://github.com/ukoethe/vigra/pull/511
+    - patches/PR_511.patch
+
 
 build:
   number: 1033
