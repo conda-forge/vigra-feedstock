@@ -7,9 +7,9 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- '13'
+- clangxx
 cxx_compiler_version:
-- '14'
+- '13'
 fftw:
 - '3'
 hdf5:
