@@ -1,0 +1,10 @@
+# Seems like vigra isn't really compatible with new compilers
+c_compiler:                    # [win]
+  - vs2017                     # [win]
+cxx_compiler:                  # [win]
+  - vs2017                     # [win]
+
+c_compiler:                    # [osx]
+  - 13                         # [osx]
+cxx_compiler:                  # [osx]
+  - 13                         # [osx]
