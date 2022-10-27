@@ -25,24 +25,14 @@ libpng:
 libtiff:
 - '4'
 numpy:
-- '1.19'
+- '1.20'
 openexr:
 - '3.1'
 pin_run_as_build:
   boost:
     max_pin: x.x.x
-  fftw:
-    max_pin: x
-  jpeg:
-    max_pin: x
-  libpng:
-    max_pin: x.x
-  libtiff:
-    max_pin: x
   python:
     min_pin: x.x
-    max_pin: x.x
-  zlib:
     max_pin: x.x
 python:
 - 3.8.* *_cpython
