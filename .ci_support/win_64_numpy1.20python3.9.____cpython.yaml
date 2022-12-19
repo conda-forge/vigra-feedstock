@@ -17,7 +17,7 @@ jpeg:
 libpng:
 - '1.6'
 libtiff:
-- '4'
+- '4.5'
 numpy:
 - '1.20'
 openexr:
