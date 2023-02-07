@@ -13,7 +13,7 @@ cxx_compiler_version:
 fftw:
 - '3'
 hdf5:
-- 1.12.2
+- 1.14.0
 imath:
 - '3.1'
 jpeg:
