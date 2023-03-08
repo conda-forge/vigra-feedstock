@@ -1,11 +1,11 @@
-About vigra
-===========
+About vigra-feedstock
+=====================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/vigra-feedstock/blob/main/LICENSE.txt)
 
 Home: http://ukoethe.github.io/vigra
 
 Package license: MIT
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/vigra-feedstock/blob/main/LICENSE.txt)
 
 Summary: Generic Programming for Computer Vision
 
@@ -312,7 +312,4 @@ Feedstock Maintainers
 * [@hmaarrfk](https://github.com/hmaarrfk/)
 * [@jakirkham](https://github.com/jakirkham/)
 * [@stuarteberg](https://github.com/stuarteberg/)
-
-
-<!-- dummy commit to enable rerendering -->
 
