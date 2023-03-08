@@ -131,8 +131,8 @@ requirements:
     - jpeg
     - libtiff
     - libpng
-    - openexr
-    - imath
+    - openexr 3.1.5
+    - imath 3.1.6
     - lemon
     - fftw
     - hdf5
@@ -143,6 +143,7 @@ requirements:
     - python
     - {{ pin_compatible('numpy') }}
     - boost
+    - imath 3.1.6
 
 test:
   imports:
