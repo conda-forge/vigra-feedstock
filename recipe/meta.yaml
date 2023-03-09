@@ -138,6 +138,7 @@ requirements:
     - hdf5
     - boost
     - zlib
+    - boost-cpp
 
   run:
     - python
