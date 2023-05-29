@@ -13,9 +13,9 @@ cxx_compiler_version:
 fftw:
 - '3'
 hdf5:
-- 1.12.2
+- 1.14.0
 imath:
-- 3.1.7
+- 3.1.8
 libjpeg_turbo:
 - 2.1.5
 libpng:
@@ -25,7 +25,7 @@ libtiff:
 macos_machine:
 - arm64-apple-darwin20.0.0
 numpy:
-- '1.20'
+- '1.21'
 openexr:
 - '3.1'
 pin_run_as_build:
