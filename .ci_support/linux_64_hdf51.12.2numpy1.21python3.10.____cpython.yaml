@@ -17,7 +17,7 @@ fftw:
 hdf5:
 - 1.12.2
 imath:
-- 3.1.8
+- 3.1.9
 libjpeg_turbo:
 - 2.1.5
 libpng:
