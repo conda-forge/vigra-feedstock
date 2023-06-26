@@ -1,3 +1,5 @@
+MACOSX_DEPLOYMENT_TARGET:
+- '10.9'
 boost:
 - 1.78.0
 channel_sources:
@@ -5,11 +7,13 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- vs2017
+- clangxx
+cxx_compiler_version:
+- '13'
 fftw:
 - '3'
 hdf5:
-- 1.12.2
+- 1.14.1
 imath:
 - 3.1.9
 libjpeg_turbo:
@@ -18,6 +22,8 @@ libpng:
 - '1.6'
 libtiff:
 - '4.5'
+macos_machine:
+- x86_64-apple-darwin13.4.0
 numpy:
 - '1.21'
 openexr:
@@ -29,9 +35,9 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 python:
-- 3.8.* *_cpython
+- 3.9.* *_73_pypy
 target_platform:
-- win-64
+- osx-64
 zip_keys:
 - - python
   - numpy

@@ -15,7 +15,7 @@ docker_image:
 fftw:
 - '3'
 hdf5:
-- 1.12.2
+- 1.14.1
 imath:
 - 3.1.9
 libjpeg_turbo:
@@ -25,7 +25,7 @@ libpng:
 libtiff:
 - '4.5'
 numpy:
-- '1.23'
+- '1.21'
 openexr:
 - '3.1'
 pin_run_as_build:
@@ -35,7 +35,7 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 python:
-- 3.11.* *_cpython
+- 3.9.* *_73_pypy
 target_platform:
 - linux-64
 zip_keys:

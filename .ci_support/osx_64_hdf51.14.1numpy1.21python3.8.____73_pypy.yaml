@@ -1,5 +1,5 @@
 MACOSX_DEPLOYMENT_TARGET:
-- '11.0'
+- '10.9'
 boost:
 - 1.78.0
 channel_sources:
@@ -13,7 +13,7 @@ cxx_compiler_version:
 fftw:
 - '3'
 hdf5:
-- 1.12.2
+- 1.14.1
 imath:
 - 3.1.9
 libjpeg_turbo:
@@ -23,7 +23,7 @@ libpng:
 libtiff:
 - '4.5'
 macos_machine:
-- arm64-apple-darwin20.0.0
+- x86_64-apple-darwin13.4.0
 numpy:
 - '1.21'
 openexr:
@@ -35,9 +35,9 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 python:
-- 3.10.* *_cpython
+- 3.8.* *_73_pypy
 target_platform:
-- osx-arm64
+- osx-64
 zip_keys:
 - - python
   - numpy
