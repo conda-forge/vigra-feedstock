@@ -8,24 +8,6 @@ jobs:
     vmImage: windows-2022
   strategy:
     matrix:
-      win_64_hdf51.12.2numpy1.21python3.10.____cpython:
-        CONFIG: win_64_hdf51.12.2numpy1.21python3.10.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_hdf51.12.2numpy1.21python3.8.____73_pypy:
-        CONFIG: win_64_hdf51.12.2numpy1.21python3.8.____73_pypy
-        UPLOAD_PACKAGES: 'True'
-      win_64_hdf51.12.2numpy1.21python3.8.____cpython:
-        CONFIG: win_64_hdf51.12.2numpy1.21python3.8.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_hdf51.12.2numpy1.21python3.9.____73_pypy:
-        CONFIG: win_64_hdf51.12.2numpy1.21python3.9.____73_pypy
-        UPLOAD_PACKAGES: 'True'
-      win_64_hdf51.12.2numpy1.21python3.9.____cpython:
-        CONFIG: win_64_hdf51.12.2numpy1.21python3.9.____cpython
-        UPLOAD_PACKAGES: 'True'
-      win_64_hdf51.12.2numpy1.23python3.11.____cpython:
-        CONFIG: win_64_hdf51.12.2numpy1.23python3.11.____cpython
-        UPLOAD_PACKAGES: 'True'
       win_64_hdf51.14.0numpy1.21python3.10.____cpython:
         CONFIG: win_64_hdf51.14.0numpy1.21python3.10.____cpython
         UPLOAD_PACKAGES: 'True'
@@ -43,6 +25,24 @@ jobs:
         UPLOAD_PACKAGES: 'True'
       win_64_hdf51.14.0numpy1.23python3.11.____cpython:
         CONFIG: win_64_hdf51.14.0numpy1.23python3.11.____cpython
+        UPLOAD_PACKAGES: 'True'
+      win_64_hdf51.14.1numpy1.21python3.10.____cpython:
+        CONFIG: win_64_hdf51.14.1numpy1.21python3.10.____cpython
+        UPLOAD_PACKAGES: 'True'
+      win_64_hdf51.14.1numpy1.21python3.8.____73_pypy:
+        CONFIG: win_64_hdf51.14.1numpy1.21python3.8.____73_pypy
+        UPLOAD_PACKAGES: 'True'
+      win_64_hdf51.14.1numpy1.21python3.8.____cpython:
+        CONFIG: win_64_hdf51.14.1numpy1.21python3.8.____cpython
+        UPLOAD_PACKAGES: 'True'
+      win_64_hdf51.14.1numpy1.21python3.9.____73_pypy:
+        CONFIG: win_64_hdf51.14.1numpy1.21python3.9.____73_pypy
+        UPLOAD_PACKAGES: 'True'
+      win_64_hdf51.14.1numpy1.21python3.9.____cpython:
+        CONFIG: win_64_hdf51.14.1numpy1.21python3.9.____cpython
+        UPLOAD_PACKAGES: 'True'
+      win_64_hdf51.14.1numpy1.23python3.11.____cpython:
+        CONFIG: win_64_hdf51.14.1numpy1.23python3.11.____cpython
         UPLOAD_PACKAGES: 'True'
   timeoutInMinutes: 360
   variables:

@@ -9,7 +9,7 @@ cxx_compiler:
 fftw:
 - '3'
 hdf5:
-- 1.12.2
+- 1.14.1
 imath:
 - 3.1.9
 libjpeg_turbo:
@@ -29,7 +29,7 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 python:
-- 3.9.* *_73_pypy
+- 3.8.* *_cpython
 target_platform:
 - win-64
 zip_keys:
