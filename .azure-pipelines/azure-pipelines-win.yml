@@ -23,6 +23,9 @@ jobs:
       win_64_hdf51.14.0numpy1.23python3.11.____cpython:
         CONFIG: win_64_hdf51.14.0numpy1.23python3.11.____cpython
         UPLOAD_PACKAGES: 'True'
+      win_64_hdf51.14.0numpy1.26python3.12.____cpython:
+        CONFIG: win_64_hdf51.14.0numpy1.26python3.12.____cpython
+        UPLOAD_PACKAGES: 'True'
       win_64_hdf51.14.2numpy1.22python3.10.____cpython:
         CONFIG: win_64_hdf51.14.2numpy1.22python3.10.____cpython
         UPLOAD_PACKAGES: 'True'
@@ -37,6 +40,9 @@ jobs:
         UPLOAD_PACKAGES: 'True'
       win_64_hdf51.14.2numpy1.23python3.11.____cpython:
         CONFIG: win_64_hdf51.14.2numpy1.23python3.11.____cpython
+        UPLOAD_PACKAGES: 'True'
+      win_64_hdf51.14.2numpy1.26python3.12.____cpython:
+        CONFIG: win_64_hdf51.14.2numpy1.26python3.12.____cpython
         UPLOAD_PACKAGES: 'True'
     maxParallel: 9
   timeoutInMinutes: 360
