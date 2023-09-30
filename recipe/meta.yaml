@@ -1,4 +1,4 @@
-{% set version = "1.11.1" %}
+{% set version = "1.11.2" %}
 
 package:
   name: vigra
@@ -8,7 +8,7 @@ source:
   {% set version_tag = "Version-%s" % version.replace(".", "-") %}
   fn: vigra-{{ version_tag }}-src.tar.gz
   url: https://github.com/ukoethe/vigra/archive/{{ version_tag }}.tar.gz
-  sha1: 518c7a9ef0e26e39563aeebf22bcee55a7d257c8
+  sha1: 0b48e18b4fa60e39151020fc18acc8bd223b051c
   patches:
     ##########################################################
     # Workaround for VS 2015                                 #
@@ -109,7 +109,7 @@ source:
 
 
 build:
-  number: 1048
+  number: 0
   detect_binary_files_with_prefix: true
   run_exports:
     # Seems to change ABI between minor versions
