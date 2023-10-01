@@ -1,7 +1,9 @@
-boost:
-- 1.78.0
+BUILD:
+- aarch64-conda_cos7-linux-gnu
+cdt_arch:
+- aarch64
 cdt_name:
-- cos6
+- cos7
 channel_sources:
 - conda-forge
 channel_targets:
@@ -18,6 +20,8 @@ hdf5:
 - 1.14.2
 imath:
 - 3.1.9
+libboost_python_devel:
+- '1.82'
 libjpeg_turbo:
 - 2.1.5
 libpng:
@@ -29,18 +33,19 @@ numpy:
 openexr:
 - '3.2'
 pin_run_as_build:
-  boost:
-    max_pin: x.x.x
   python:
     min_pin: x.x
     max_pin: x.x
 python:
 - 3.9.* *_cpython
+python_impl:
+- cpython
 target_platform:
-- linux-64
+- linux-aarch64
 zip_keys:
 - - python
   - numpy
+  - python_impl
   - channel_sources
 zlib:
 - '1.2'
