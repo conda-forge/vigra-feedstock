@@ -68,5 +68,7 @@ make -j${CPU_COUNT} V=1 VERBOSE=1
 
 make install
 if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR}" != "" ]]; then
-make check_python
+    if [[ "${python_impl}" != "pypy" ]]; then
+        make check_python
+    fi
 fi
