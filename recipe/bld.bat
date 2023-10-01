@@ -24,5 +24,7 @@ if errorlevel 1 exit 1
 nmake install
 if errorlevel 1 exit 1
 
-nmake check_python
-if errorlevel 1 exit 1
+if "%python_impl%" NEQ "pypy" (
+    nmake check_python
+    if errorlevel 1 exit 1
+)

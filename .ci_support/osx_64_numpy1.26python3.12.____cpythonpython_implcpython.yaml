@@ -1,46 +1,47 @@
-boost:
-- 1.78.0
-cdt_name:
-- cos7
+MACOSX_DEPLOYMENT_TARGET:
+- '10.9'
 channel_sources:
 - conda-forge/label/python_rc,conda-forge
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- gxx
+- clangxx
 cxx_compiler_version:
-- '12'
-docker_image:
-- quay.io/condaforge/linux-anvil-cos7-x86_64
+- '15'
 fftw:
 - '3'
 hdf5:
 - 1.14.2
 imath:
 - 3.1.9
+libboost_python_devel:
+- '1.82'
 libjpeg_turbo:
 - 2.1.5
 libpng:
 - '1.6'
 libtiff:
 - '4.6'
+macos_machine:
+- x86_64-apple-darwin13.4.0
 numpy:
 - '1.26'
 openexr:
 - '3.2'
 pin_run_as_build:
-  boost:
-    max_pin: x.x.x
   python:
     min_pin: x.x
     max_pin: x.x
 python:
 - 3.12.* *_cpython
+python_impl:
+- cpython
 target_platform:
-- linux-ppc64le
+- osx-64
 zip_keys:
 - - python
   - numpy
+  - python_impl
   - channel_sources
 zlib:
 - '1.2'
