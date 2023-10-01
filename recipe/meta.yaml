@@ -51,7 +51,6 @@ requirements:
   run:
     - python
     - {{ pin_compatible('numpy') }}
-    - libboost-python-devel
 
 test:
   imports:
