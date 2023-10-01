@@ -10,8 +10,11 @@ source:
   url: https://github.com/ukoethe/vigra/archive/{{ version_tag }}.tar.gz
   sha1: 0b48e18b4fa60e39151020fc18acc8bd223b051c
   patches:
+    # All patches below are upstreamed, and will be included in the next version
     # C++17/C++20 Compatibility -- https://github.com/ukoethe/vigra/pull/511
     - patches/PR_511.patch
+    - patches/nose_to_pytest.patch
+    - patches/setuptools.patch
 
 
 build:

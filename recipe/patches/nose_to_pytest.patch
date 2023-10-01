@@ -1,0 +1,198 @@
+From 7db3841c7e5a70009fa53f1813c2f8e83af1295b Mon Sep 17 00:00:00 2001
+From: Mark Harfouche <mark.harfouche@gmail.com>
+Date: Sat, 30 Sep 2023 15:36:36 -0400
+Subject: [PATCH 1/2] Migrate to pytest
+
+---
+ config/FindVIGRANUMPY_DEPENDENCIES.cmake | 14 +++++++-------
+ docsrc/installation.dxx                  |  2 +-
+ vigranumpy/test/CMakeLists.txt           | 10 +++++-----
+ vigranumpy/test/test_arraytypes.py       | 21 ++++++++++++++++-----
+ 4 files changed, 29 insertions(+), 18 deletions(-)
+
+diff --git a/config/FindVIGRANUMPY_DEPENDENCIES.cmake b/config/FindVIGRANUMPY_DEPENDENCIES.cmake
+index 964ae9230..c1a64958f 100644
+--- a/config/FindVIGRANUMPY_DEPENDENCIES.cmake
++++ b/config/FindVIGRANUMPY_DEPENDENCIES.cmake
+@@ -99,13 +99,13 @@ IF(Python_Interpreter_FOUND)
+     #
+     ######################################################################
+     execute_process(COMMAND ${Python_EXECUTABLE} -c
+-                     "import nose"
+-                      RESULT_VARIABLE PYTHON_NOSETESTS_NOT_FOUND)
++                    "import pytest"
++                    RESULT_VARIABLE PYTHON_PYTEST_NOT_FOUND)
+ 
+-    IF(NOT PYTHON_NOSETESTS_NOT_FOUND)
+-        MESSAGE(STATUS "Searching for Python nosetests: ok")
++    IF(NOT PYTHON_PYTEST_NOT_FOUND)
++        MESSAGE(STATUS "Searching for Python pytest: ok")
+     ELSE()
+-        MESSAGE(STATUS "Could NOT find Python nosetests ('import nose' failed)")
++        MESSAGE(STATUS "Could NOT find Python pytest ('import pytest' failed)")
+     ENDIF()
+ 
+     ######################################################################
+@@ -160,8 +160,8 @@ IF(Python_Interpreter_FOUND)
+     if(TEST_VIGRANUMPY AND NOT VIGRANUMPY_DEPENDENCIES_FOUND)
+         MESSAGE(FATAL_ERROR "  vigranumpy dependencies NOT found while TEST_VIGRANUMPY=1")
+     endif()
+-    if(TEST_VIGRANUMPY AND PYTHON_NOSETESTS_NOT_FOUND)
+-        MESSAGE(FATAL_ERROR "  nosetests NOT found while TEST_VIGRANUMPY=1")
++    if(TEST_VIGRANUMPY AND PYTHON_PYTEST_NOT_FOUND)
++        MESSAGE(FATAL_ERROR "  pytest NOT found while TEST_VIGRANUMPY=1")
+     endif()
+ ELSE()
+     MESSAGE(STATUS "Python not found. Make sure that Python is in your PATH or set the appropriate variables as described in https://cmake.org/cmake/help/latest/module/FindPython.html")
+diff --git a/docsrc/installation.dxx b/docsrc/installation.dxx
+index e02e460cf..b44d21e4f 100755
+--- a/docsrc/installation.dxx
++++ b/docsrc/installation.dxx
+@@ -13,7 +13,7 @@
+     <li> <a href="http://www.doxygen.org/">doxygen</a> and <a href="http://www.python.org/">Python</a> to generate C++ documentation.
+     <li> <a href="http://www.python.org/">Python</a>, <a href="http://www.boost.org/">boost_python</a>, and <a href="http://numpy.scipy.org/">numpy</a> to compile and run vigranumpy (the VIGRA Python bindings).
+     <li> <a href="http://sphinx.pocoo.org/">sphinx</a> to generate vigranumpy documentation.
+-    <li> <a href="http://readthedocs.org/docs/nose/en/latest/">nosetests</a> to execute the vigranumpy test suite.
++    <li> <a href="https://docs.pytest.org/">pytest</a> to execute the vigranumpy test suite.
+     </ul>
+ 
+     These dependencies are optional - the functionality will simply be unavailable if the libraries cannot be found.
+diff --git a/vigranumpy/test/CMakeLists.txt b/vigranumpy/test/CMakeLists.txt
+index 1c267a5c1..eca7c5f4d 100644
+--- a/vigranumpy/test/CMakeLists.txt
++++ b/vigranumpy/test/CMakeLists.txt
+@@ -84,7 +84,7 @@ else()
+     endif()
+ endif()
+ 
+-IF(NOT PYTHON_NOSETESTS_NOT_FOUND)
++IF(NOT PYTHON_PYTEST_NOT_FOUND)
+     # copy the individual test scripts
+     FOREACH(test_script ${TEST_SCRIPTS})
+         ADD_CUSTOM_COMMAND(
+@@ -122,7 +122,7 @@ IF(NOT PYTHON_NOSETESTS_NOT_FOUND)
+         get_filename_component(PYTHON_PATH ${Python_EXECUTABLE} PATH)
+         get_filename_component(PYTHON_EXE  ${Python_EXECUTABLE} NAME)
+         SET(EXTRA_PATH  "${PYTHON_PATH}${PATHSEP}${EXTRA_PATH}")
+-        SET(VIGRA_TEST_EXECUTABLE "${PYTHON_EXE} -c \"import nose; nose.main()\" . %CONFIGURATION%")
++        SET(VIGRA_TEST_EXECUTABLE "${PYTHON_EXE} -m pytest . %CONFIGURATION%")
+         SET(VIGRA_TEST_SCRIPT     "${CMAKE_CURRENT_BINARY_DIR}/run_vigranumpytest.bat")
+         CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config/run_test.bat.in
+                        ${VIGRA_TEST_SCRIPT}.in
+@@ -130,7 +130,7 @@ IF(NOT PYTHON_NOSETESTS_NOT_FOUND)
+         file(GENERATE OUTPUT "${VIGRA_TEST_SCRIPT}"
+                       INPUT  "${VIGRA_TEST_SCRIPT}.in")
+     ELSE()
+-        SET(VIGRA_TEST_EXECUTABLE "${Python_EXECUTABLE} -c \"import nose; nose.main()\" .")
++        SET(VIGRA_TEST_EXECUTABLE "${Python_EXECUTABLE} -m pytest .")
+         SET(VIGRA_TEST_SCRIPT     "${CMAKE_CURRENT_BINARY_DIR}/run_vigranumpytest.sh")
+         CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/config/run_test.sh.in
+                        ${VIGRA_TEST_SCRIPT}.in
+@@ -161,11 +161,11 @@ IF(NOT PYTHON_NOSETESTS_NOT_FOUND)
+     if(MSVC AND NOT (MSVC_VERSION VERSION_LESS "11"))
+         # FIXME: this may not portable between VC versions (works for 11.0 - 14.0)
+         set(VIGRA_TEST_EXE "${Python_EXECUTABLE}")
+-        set(VIGRA_TEST_ARGS "-c \"import nose; nose.main()\" . \$(Configuration)")
++        set(VIGRA_TEST_ARGS "-m pytest . \$(Configuration)")
+         configure_file(${CMAKE_SOURCE_DIR}/config/testdebug.vcxproj.user.in
+                        ${CMAKE_CURRENT_BINARY_DIR}/vigranumpytest.vcxproj.user
+                        @ONLY)
+     endif()
+ ELSE()
+-        MESSAGE(STATUS "  vigranumpy tests will NOT be executed (nosetests missing)")
++        MESSAGE(STATUS "  vigranumpy tests will NOT be executed (pytest missing)")
+ ENDIF()
+diff --git a/vigranumpy/test/test_arraytypes.py b/vigranumpy/test/test_arraytypes.py
+index a0d92be48..fb3f7bca0 100644
+--- a/vigranumpy/test/test_arraytypes.py
++++ b/vigranumpy/test/test_arraytypes.py
+@@ -33,21 +33,19 @@
+ #
+ #######################################################################
+ 
+-# run with a simple 'nosetests' in this directory
+-# (and nose installed, i.e. 'easy_install nose')
++# run with a simple 'pytest' in this directory
++# (and pytest installed, i.e. 'pip install pytest' or 'conda install pytest')
+ 
+ from __future__ import division, print_function
+ from functools import reduce
+ 
+ import sys
+-print("\nexecuting test file", __file__, file=sys.stderr)
+ exec(compile(open('set_paths.py', "rb").read(), 'set_paths.py', 'exec'))
+ # import vigra  # FIXME: without this line, C++ constructors don't find VigraArray
+ import vigra.arraytypes as arraytypes
+ import vigra.ufunc as ufunc
+ import numpy, copy
+ import vigranumpytest as vt
+-from nose.tools import assert_equal, raises, assert_true
+ 
+ from vigra.arraytypes import AxisTags, AxisInfo
+ import platform
+@@ -75,6 +73,19 @@ def iteritems(dictionary, **kwargs):
+     if n.startswith('test'):
+         allTests.add(n)
+ 
++# 2023/09
++# Small compatibility shims with old code that used
++#     assert_equal and assert_true
++# from nosetest. Rewriting the tests to use python's assert statement
++# was decided to be too invasive.
++def assert_equal(x, y):
++    assert x == y
++
++
++def assert_true(x):
++    assert x
++
++
+ def checkShape(shape1, shape2):
+     assert_equal(shape1, shape2)
+ 
+@@ -455,7 +466,7 @@ def checkCompatibility(obj, compatible):
+         except Exception:
+             print("exception in %s with shape %s strides %s tags (%s)" % (n, obj.shape, obj.strides,
+                                             repr(getattr(obj, "axistags", "none"))))
+-            raise     
++            raise
+ 
+ def testAxisTags():
+     axistags = AxisTags(AxisInfo.c(description="RGB"),
+
+From b638a407082f999e40698d527ef9038a9a968767 Mon Sep 17 00:00:00 2001
+From: Mark Harfouche <mark.harfouche@gmail.com>
+Date: Sat, 30 Sep 2023 15:44:08 -0400
+Subject: [PATCH 2/2] install pytest during build
+
+---
+ ci/build_unix.sh     | 2 +-
+ ci/build_windows.bat | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/ci/build_unix.sh b/ci/build_unix.sh
+index f1ab30173..2ef8f0259 100644
+--- a/ci/build_unix.sh
++++ b/ci/build_unix.sh
+@@ -8,7 +8,7 @@ conda config --show
+ conda create \
+     --quiet --yes \
+     --name vigra \
+-    python=${PYTHON_VERSION} c-compiler cxx-compiler \
++    python=${PYTHON_VERSION} pytest c-compiler cxx-compiler \
+     zlib jpeg libpng libtiff hdf5 fftw \
+     boost boost-cpp numpy h5py nose sphinx \
+     openexr lemon cmake make
+diff --git a/ci/build_windows.bat b/ci/build_windows.bat
+index 687b75b2a..2ef941383 100644
+--- a/ci/build_windows.bat
++++ b/ci/build_windows.bat
+@@ -15,7 +15,7 @@ rem ref: https://github.com/ukoethe/vigra/issues/525
+ call conda create ^
+     --quiet --yes ^
+     --name vigra ^
+-    python=%PYTHON_VERSION% c-compiler=1.5.0 cxx-compiler=1.5.0 ^
++    python=%PYTHON_VERSION% pytest c-compiler=1.5.0 cxx-compiler=1.5.0 ^
+     zlib jpeg libpng libtiff hdf5 fftw cmake ninja ^
+     boost=1.78 boost-cpp=1.78 numpy h5py nose sphinx ^
+     openexr lemon
