@@ -18,7 +18,7 @@ source:
 
 
 build:
-  number: 3
+  number: 4
   detect_binary_files_with_prefix: true
   run_exports:
     # Seems to change ABI between minor versions
