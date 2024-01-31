@@ -15,10 +15,11 @@ source:
     - patches/PR_511.patch
     - patches/nose_to_pytest.patch
     - patches/setuptools.patch
+    - patches/555-std_random_shuffle.patch
 
 
 build:
-  number: 3
+  number: 4
   detect_binary_files_with_prefix: true
   run_exports:
     # Seems to change ABI between minor versions
