@@ -1,5 +1,0 @@
-# Seems like vigra isn't really compatible with new compilers
-c_compiler:                    # [win]
-  - vs2017                     # [win]
-cxx_compiler:                  # [win]
-  - vs2017                     # [win]
