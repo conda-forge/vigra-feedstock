@@ -1,5 +1,9 @@
 MACOSX_DEPLOYMENT_TARGET:
 - '10.9'
+c_stdlib:
+- macosx_deployment_target
+c_stdlib_version:
+- '10.9'
 channel_sources:
 - conda-forge
 channel_targets:
@@ -15,7 +19,7 @@ hdf5:
 imath:
 - 3.1.11
 libboost_python_devel:
-- '1.82'
+- '1.84'
 libjpeg_turbo:
 - '3'
 libpng:
@@ -39,6 +43,8 @@ python_impl:
 target_platform:
 - osx-64
 zip_keys:
+- - c_stdlib_version
+  - MACOSX_DEPLOYMENT_TARGET
 - - python
   - numpy
   - python_impl
