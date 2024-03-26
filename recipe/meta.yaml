@@ -47,9 +47,9 @@ requirements:
     - lemon
     - fftw
     - hdf5
+    - libboost
     - libboost-python-devel
     - zlib
-
   run:
     - python
     - {{ pin_compatible('numpy') }}
