@@ -19,7 +19,7 @@ source:
 
 
 build:
-  number: 5
+  number: 6
   detect_binary_files_with_prefix: true
   run_exports:
     # Seems to change ABI between minor versions
@@ -32,6 +32,7 @@ requirements:
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - numpy                                  # [build_platform != target_platform]
     - {{ compiler("cxx") }}
+    - {{ stdlib("c") }}
     - cmake
     - make  # [unix]
   host:
@@ -51,7 +52,6 @@ requirements:
 
   run:
     - python
-    - {{ pin_compatible('numpy') }}
 
 test:
   imports:
