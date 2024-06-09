@@ -1,5 +1,7 @@
 MACOSX_DEPLOYMENT_TARGET:
 - '11.0'
+MACOSX_SDK_VERSION:
+- '11.0'
 c_stdlib:
 - macosx_deployment_target
 c_stdlib_version:
@@ -18,6 +20,8 @@ hdf5:
 - 1.14.3
 imath:
 - 3.1.11
+libboost_devel:
+- '1.84'
 libboost_python_devel:
 - '1.84'
 libjpeg_turbo:
@@ -28,25 +32,9 @@ libtiff:
 - '4.6'
 macos_machine:
 - arm64-apple-darwin20.0.0
-numpy:
-- '1.23'
 openexr:
 - '3.2'
-pin_run_as_build:
-  python:
-    min_pin: x.x
-    max_pin: x.x
-python:
-- 3.11.* *_cpython
-python_impl:
-- cpython
 target_platform:
 - osx-arm64
-zip_keys:
-- - c_stdlib_version
-  - MACOSX_DEPLOYMENT_TARGET
-- - python
-  - numpy
-  - python_impl
 zlib:
-- '1.2'
+- '1'
