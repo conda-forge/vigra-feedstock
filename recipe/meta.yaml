@@ -26,7 +26,7 @@ source:
 build:
   # Build number 100 was used to differentiate build 5 and below
   # as a build that no longer supports numpy
-  number: 100
+  number: 101
   detect_binary_files_with_prefix: true
   # There is a vigra header ./include/vigra/promote_traits.hxx.py
   # That doesn't have a meaningful pyc compilation since this is supposed
@@ -54,9 +54,11 @@ requirements:
     - lemon
     - fftw
     - hdf5
-    - libboost-devel
-    - libboost-python-devel
     - zlib
+    # Only requried for numpy integration which we
+    # gave up on building
+    # - libboost-devel
+    # - libboost-python-devel
   run_constrained:
     # Make it conflict with other installations of vigra
     - vigra <0.0.0
