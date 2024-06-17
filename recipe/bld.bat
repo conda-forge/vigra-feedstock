@@ -12,9 +12,8 @@ cmake .. ^
         -DBUILD_SHARED_LIBS=1 ^
         -DWITH_OPENEXR=1 ^
         -DWITH_LEMON=1 ^
+        -DWITH_VIBRANUMPY=0 ^
         -DCMAKE_CXX_FLAGS="%CXXFLAGS% -DH5_BUILT_AS_DYNAMIC_LIB /EHsc -DFFTW_DLL" ^
-        -DPython_EXECUTABLE:FILEPATH=%PYTHON% ^
-        -DBoost_PYTHON_LIBRARY:PATH="%LIBRARY_LIB%\boost_python%CONDA_PY%.lib" ^
         "%SRC_DIR%"
 if errorlevel 1 exit 1
 
@@ -23,8 +22,3 @@ if errorlevel 1 exit 1
 
 nmake install
 if errorlevel 1 exit 1
-
-if "%python_impl%" NEQ "pypy" (
-    nmake check_python
-    if errorlevel 1 exit 1
-)

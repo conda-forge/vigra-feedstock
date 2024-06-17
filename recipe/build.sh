@@ -1,14 +1,12 @@
 #!/bin/bash
-EXTRA_CMAKE_ARGS=""
 if [[ `uname` == 'Darwin' ]];
 then
     EXTRA_CMAKE_ARGS="-DCMAKE_OSX_DEPLOYMENT_TARGET=${CMAKE_OSX_DEPLOYMENT_TARGET}"
     export LDFLAGS="-undefined dynamic_lookup ${LDFLAGS}"
 else
+    EXTRA_CMAKE_ARGS=""
     export CXXFLAGS="-pthread ${CXXFLAGS}"
 fi
-
-export EXTRA_CMAKE_ARGS
 
 # In release mode, we use -O2 because gcc is known to miscompile certain vigra functionality at the O3 level.
 # (This is probably due to inappropriate use of undefined behavior in vigra itself.)
@@ -25,7 +23,7 @@ cmake ${CMAKE_ARGS} ..\
         -DCMAKE_EXE_LINKER_FLAGS="${LDFLAGS}" \
         -DCMAKE_CXX_FLAGS="${CXXFLAGS}" \
 \
-        -DWITH_VIGRANUMPY=TRUE \
+        -DWITH_VIGRANUMPY=FALSE \
         -DWITH_BOOST_THREAD=1 \
         -DWITH_OPENEXR=1 \
         -DWITH_LEMON=1 \
@@ -42,10 +40,6 @@ cmake ${CMAKE_ARGS} ..\
 \
         -DBoost_INCLUDE_DIR=${PREFIX}/include \
         -DBoost_LIBRARY_DIRS=${PREFIX}/lib \
-        -DBoost_PYTHON_LIBRARY=${PREFIX}/lib/libboost_python${CONDA_PY}${SHLIB_EXT} \
-\
-        -DPython_ROOT_DIR=${PREFIX} \
-        -DPython_FIND_VIRTUALENV=ONLY \
 \
         -DZLIB_INCLUDE_DIR=${PREFIX}/include \
         -DZLIB_LIBRARY=${PREFIX}/lib/libz${SHLIB_EXT} \
@@ -67,8 +61,3 @@ make -j${CPU_COUNT} V=1 VERBOSE=1
 #eval ${LIBRARY_SEARCH_VAR}=$PREFIX/lib make check
 
 make install
-if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR}" != "" ]]; then
-    if [[ "${python_impl}" != "pypy" ]]; then
-        make check_python
-    fi
-fi

@@ -1,7 +1,12 @@
 {% set version = "1.11.2" %}
 
 package:
-  name: vigra
+  # Package top level name was changed from vigra to libvigra
+  # to indicate that only the C library is being built
+  # Help is appreciated to rebuild the Python library
+  # at which point the package `vigra` can be reintroduced
+  # https://github.com/conda-forge/vigra-feedstock/issues/134
+  name: libvigra
   version: {{ version }}
 
 source:
@@ -19,25 +24,28 @@ source:
 
 
 build:
-  number: 5
+  # Build number 100 was used to differentiate build 5 and below
+  # as a build that no longer supports numpy
+  number: 100
   detect_binary_files_with_prefix: true
+  # There is a vigra header ./include/vigra/promote_traits.hxx.py
+  # That doesn't have a meaningful pyc compilation since this is supposed
+  # to be a c-package since we've disabled python compilation
+  # https://github.com/conda-forge/vigra-feedstock/issues/134
+  skip_compile_pyc:
+    - '*'
   run_exports:
     # Seems to change ABI between minor versions
     # https://abi-laboratory.pro/index.php?view=timeline&l=vigra
-    - {{ pin_subpackage('vigra', max_pin='x.x') }}
+    - {{ pin_subpackage('libvigra', max_pin='x.x') }}
 
 requirements:
   build:
-    - python                                 # [build_platform != target_platform]
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - numpy                                  # [build_platform != target_platform]
     - {{ compiler("cxx") }}
+    - {{ stdlib("c") }}
     - cmake
     - make  # [unix]
   host:
-    - python
-    - nose
-    - numpy
     - libjpeg-turbo
     - libtiff
     - libpng
@@ -46,16 +54,18 @@ requirements:
     - lemon
     - fftw
     - hdf5
+    - libboost-devel
     - libboost-python-devel
     - zlib
-
-  run:
-    - python
-    - {{ pin_compatible('numpy') }}
+  run_constrained:
+    # Make it conflict with other installations of vigra
+    - vigra <0.0.0
 
 test:
-  imports:
-    - vigra
+  commands:
+    - test -f ${PREFIX}/lib/libvigraimpex${SHLIB_EXT}            # [unix]
+    - if not exist %LIBRARY_PREFIX%\\lib\\vigraimpex.lib exit 1  # [win]
+    - if not exist %LIBRARY_PREFIX%\\bin\\vigraimpex.dll exit 1  # [win]
 
 about:
   home: http://ukoethe.github.io/vigra
@@ -68,3 +78,4 @@ extra:
     - jakirkham
     - stuarteberg
     - hmaarrfk
+  feedstock-name: vigra
