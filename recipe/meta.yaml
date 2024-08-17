@@ -26,7 +26,7 @@ source:
 build:
   # Build number 100 was used to differentiate build 5 and below
   # as a build that no longer supports numpy
-  number: 100
+  number: 101
   detect_binary_files_with_prefix: true
   # There is a vigra header ./include/vigra/promote_traits.hxx.py
   # That doesn't have a meaningful pyc compilation since this is supposed
