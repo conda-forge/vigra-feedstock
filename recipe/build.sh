@@ -1,6 +1,6 @@
 #!/bin/bash
-if [[ `uname` == 'Darwin' ]];
-then
+set -ex
+if [[ `uname` == 'Darwin' ]]; then
     EXTRA_CMAKE_ARGS="-DCMAKE_OSX_DEPLOYMENT_TARGET=${CMAKE_OSX_DEPLOYMENT_TARGET}"
     export LDFLAGS="-undefined dynamic_lookup ${LDFLAGS}"
 else
@@ -8,12 +8,16 @@ else
     export CXXFLAGS="-pthread ${CXXFLAGS}"
 fi
 
+# Try to better understand why python is not found
+export CMAKE_FIND_DEBUG_MODE=1
+
 # In release mode, we use -O2 because gcc is known to miscompile certain vigra functionality at the O3 level.
 # (This is probably due to inappropriate use of undefined behavior in vigra itself.)
-export CXXFLAGS="-O2 -DNDEBUG ${CXXFLAGS}"
+export CXXFLAGS="-O2 ${CXXFLAGS}"
+export WITH_VIGRANUMPY=${WITH_VIGRANUMPY:-FALSE}
 
 # Configure
-mkdir build
+mkdir -p build
 cd build
 cmake ${CMAKE_ARGS} ..\
         -DCMAKE_INSTALL_PREFIX=${PREFIX} \
@@ -23,11 +27,16 @@ cmake ${CMAKE_ARGS} ..\
         -DCMAKE_EXE_LINKER_FLAGS="${LDFLAGS}" \
         -DCMAKE_CXX_FLAGS="${CXXFLAGS}" \
 \
-        -DWITH_VIGRANUMPY=FALSE \
         -DWITH_BOOST_THREAD=1 \
         -DWITH_OPENEXR=1 \
         -DWITH_LEMON=1 \
         -DDEPENDENCY_SEARCH_PREFIX=${PREFIX} \
+\
+        -DWITH_VIGRANUMPY=${WITH_VIGRANUMPY} \
+        -DBoost_PYTHON_LIBRARY=${PREFIX}/lib/libboost_python${CONDA_PY}${SHLIB_EXT} \
+        -DPython_EXECUTABLE=${PYTHON} \
+        -DPython_ROOT_DIR=${PREFIX} \
+        -DPython_FIND_VIRTUALENV=ONLY \
 \
         -DFFTW3F_INCLUDE_DIR=${PREFIX}/include \
         -DFFTW3F_LIBRARY=${PREFIX}/lib/libfftw3f${SHLIB_EXT} \
@@ -61,3 +70,12 @@ make -j${CPU_COUNT} V=1 VERBOSE=1
 #eval ${LIBRARY_SEARCH_VAR}=$PREFIX/lib make check
 
 make install
+
+# if python has been built (i.e. vigra package, not libvigra)
+if [[ "$PKG_NAME" == "vigra" ]]; then
+    if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR}" != "" ]]; then
+        if [[ "${python_impl}" != "pypy" ]]; then
+            make check_python
+        fi
+    fi
+fi
