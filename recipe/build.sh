@@ -13,8 +13,8 @@ fi
 export CXXFLAGS="-O2 ${CXXFLAGS}"
 WITH_VIGRANUMPY=${WITH_VIGRANUMPY:-FALSE}
 
-# Debug finding python....
-CMAKE_FIND_DEBUG_MODE=1
+# Uncomment to debug finding python....
+# CMAKE_FIND_DEBUG_MODE=1
 
 # Configure
 mkdir -p build
@@ -67,7 +67,9 @@ make install
 
 # if python has been built (i.e. vigra package, not libvigra)
 if [[ "$PKG_NAME" == "vigra" ]]; then
-    if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR}" != "" ]]; then
+    # if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR}" != "" ]]; then
+    # Probably too slow to run these tests on emulation...
+    if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" ]]; then
         if [[ "${python_impl}" != "pypy" ]]; then
             make check_python
         fi
