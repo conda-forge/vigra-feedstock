@@ -10,6 +10,7 @@ source:
 
 build:
   number: 0
+  skip: true  # [python_impl == "pypy"]
   detect_binary_files_with_prefix: true
   # There is a vigra header ./include/vigra/promote_traits.hxx.py
   # That doesn't have a meaningful pyc compilation since this is supposed
@@ -54,6 +55,8 @@ outputs:
   - name: vigra
     script: build_python.sh  # [unix]
     script: bld_python.bat   # [win]
+    build:
+      skip: true  # [python_impl == "pypy"]
     requirements:
       build:
         - python                                 # [build_platform != target_platform]
