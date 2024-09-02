@@ -1,0 +1,3 @@
+megabuild:
+- true      # [not (ppc64le or aarch64)]
+- false     # [ppc64le or aarch64]

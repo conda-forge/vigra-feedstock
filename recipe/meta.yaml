@@ -29,8 +29,11 @@ requirements:
     - {{ compiler('c') }}
     - {{ stdlib('c') }}
     - cmake
-    - make  # [unix]
+    - make                                   # [unix]
+    - python                                 # [not megabuild]
+    - cross-python_{{ target_platform }}     # [(not megabuild) and (build_platform != target_platform)]
   host:
+    - python                                 # [not megabuild]
     - libjpeg-turbo
     - libtiff
     - libpng
@@ -85,7 +88,8 @@ outputs:
         - zlib
         - {{ pin_subpackage('libvigra', exact=true) }}
       run:
-        - {{ pin_subpackage('libvigra', exact=true) }}
+        # don't pin exact due to the megabuild/non-megabuild stuff
+        - {{ pin_subpackage('libvigra', max_pin='x.x.x') }}
     test:
       imports:
         - vigra
