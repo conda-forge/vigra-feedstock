@@ -1,3 +1,5 @@
+c_compiler:
+- vs2019
 c_stdlib:
 - vs
 channel_sources:
@@ -22,9 +24,27 @@ libpng:
 - '1.6'
 libtiff:
 - '4.6'
+megabuild:
+- 'false'
+numpy:
+- '2.0'
 openexr:
 - '3.2'
+pin_run_as_build:
+  python:
+    min_pin: x.x
+    max_pin: x.x
+python:
+- 3.9.* *_cpython
+python_impl:
+- cpython
 target_platform:
 - win-64
+vigra:
+- '1.11'
+zip_keys:
+- - python
+  - numpy
+  - python_impl
 zlib:
 - '1'
