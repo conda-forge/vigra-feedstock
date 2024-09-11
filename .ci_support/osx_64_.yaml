@@ -27,7 +27,7 @@ fftw:
 hdf5:
 - 1.14.3
 imath:
-- 3.1.11
+- 3.1.12
 libboost_devel:
 - '1.86'
 libboost_python_devel:
@@ -69,7 +69,7 @@ python_impl:
 target_platform:
 - osx-64
 vigra:
-- '1.11'
+- '1.12'
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
