@@ -9,7 +9,7 @@ source:
   sha256: 8836a40a340f96ed2abf53780e883c5bf58002eb182cfccb4255b553ca48db33
 
 build:
-  number: 3
+  number: 4
   skip: true  # [python_impl == "pypy"]
   detect_binary_files_with_prefix: true
   # There is a vigra header ./include/vigra/promote_traits.hxx.py
