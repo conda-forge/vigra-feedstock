@@ -10,10 +10,6 @@ cdt_name:
 - cos7
 channel_sources:
 - conda-forge
-- conda-forge
-- conda-forge
-- conda-forge/label/python_rc,conda-forge
-- conda-forge
 channel_targets:
 - conda-forge main
 cxx_compiler:
@@ -47,7 +43,7 @@ numpy:
 - '2'
 - '2.0'
 openexr:
-- '3.2'
+- '3.3'
 pin_run_as_build:
   python:
     min_pin: x.x
@@ -76,6 +72,5 @@ zip_keys:
 - - python
   - numpy
   - python_impl
-  - channel_sources
 zlib:
 - '1'
