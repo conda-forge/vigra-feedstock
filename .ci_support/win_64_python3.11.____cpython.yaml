@@ -29,7 +29,7 @@ megabuild:
 numpy:
 - '2.0'
 openexr:
-- '3.2'
+- '3.3'
 pin_run_as_build:
   python:
     min_pin: x.x
@@ -46,6 +46,5 @@ zip_keys:
 - - python
   - numpy
   - python_impl
-  - channel_sources
 zlib:
 - '1'
