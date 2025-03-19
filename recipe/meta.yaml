@@ -18,7 +18,7 @@ build:
   # https://github.com/conda-forge/vigra-feedstock/issues/134
   skip_compile_pyc:
     - '*'
-  ignore_run_exports_from:   # [not megabuild]
+  ignore_run_exports_from:  # [not megabuild]
     - python                # [not megabuild]
   run_exports:
     # Seems to change ABI between minor versions
