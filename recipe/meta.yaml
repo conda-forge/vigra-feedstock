@@ -1,4 +1,4 @@
-{% set version = "1.12.1" %}
+{% set version = "1-12-2" %}
 
 package:
   name: libvigra
@@ -6,10 +6,10 @@ package:
 
 source:
   url: https://github.com/ukoethe/vigra/archive/Version-{{ version.replace(".", "-") }}.tar.gz
-  sha256: 8836a40a340f96ed2abf53780e883c5bf58002eb182cfccb4255b553ca48db33
+  sha256: e927477a8a0bcdabcaab914e425782f7eba82711dbaca02538dfda79476f6b7e
 
 build:
-  number: 5
+  number: 0
   skip: true  # [python_impl == "pypy"]
   detect_binary_files_with_prefix: true
   # There is a vigra header ./include/vigra/promote_traits.hxx.py
@@ -18,7 +18,7 @@ build:
   # https://github.com/conda-forge/vigra-feedstock/issues/134
   skip_compile_pyc:
     - '*'
-  ignore_run_exports_from:  # [not megabuild]
+  ignore_run_exports_from:   # [not megabuild]
     - python                # [not megabuild]
   run_exports:
     # Seems to change ABI between minor versions
@@ -59,7 +59,7 @@ outputs:
   - name: libvigra
   - name: vigra
     script: build_python.sh  # [unix]
-    script: bld_python.bat   # [win]
+    script: bld_python.bat  # [win]
     build:
       skip: true  # [python_impl == "pypy"]
     requirements:
