@@ -1,9 +1,0 @@
-# https://github.com/conda-forge/libnetcdf-feedstock/pull/165
-# And I (hmaarrfk) want to be able to use jpegturbo
-# __migrator:
-#   build_number: 1
-#   kind: version
-#   migration_number: 1
-# hdf5:
-# - 1.14.0
-# migrator_ts: 1675622758
