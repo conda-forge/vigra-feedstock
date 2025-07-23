@@ -5,7 +5,7 @@ MACOSX_SDK_VERSION:
 c_compiler:
 - clang
 c_compiler_version:
-- '18'
+- '19'
 c_stdlib:
 - macosx_deployment_target
 c_stdlib_version:
@@ -17,7 +17,7 @@ channel_targets:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '18'
+- '19'
 fftw:
 - '3'
 hdf5:
@@ -25,9 +25,9 @@ hdf5:
 imath:
 - 3.1.12
 libboost_devel:
-- '1.86'
+- '1.88'
 libboost_python_devel:
-- '1.86'
+- '1.88'
 libjpeg_turbo:
 - '3'
 libpng:
@@ -39,13 +39,9 @@ libvigra:
 macos_machine:
 - arm64-apple-darwin20.0.0
 megabuild:
-- 'true'
+- true
 numpy:
-- '2.0'
-- '2.0'
-- '2.0'
 - '2'
-- '2.0'
 openexr:
 - '3.3'
 pin_run_as_build:
@@ -60,10 +56,6 @@ python:
 - 3.9.* *_cpython
 python_impl:
 - cpython
-- cpython
-- cpython
-- cpython
-- cpython
 target_platform:
 - osx-arm64
 vigra:
@@ -71,8 +63,5 @@ vigra:
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
-- - python
-  - numpy
-  - python_impl
 zlib:
 - '1'
