@@ -7,6 +7,8 @@ package:
 source:
   url: https://github.com/ukoethe/vigra/archive/Version-{{ version.replace(".", "-") }}.tar.gz
   sha256: e927477a8a0bcdabcaab914e425782f7eba82711dbaca02538dfda79476f6b7e
+  patches:
+    - 0001-Address-changes-in-reference-counting-for-python-3.1.patch
 
 build:
   number: 4
