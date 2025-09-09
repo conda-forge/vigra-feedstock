@@ -11,7 +11,7 @@ source:
     - 0001-Address-changes-in-reference-counting-for-python-3.1.patch
 
 build:
-  number: 4
+  number: 5
   skip: true  # [python_impl == "pypy"]
   detect_binary_files_with_prefix: true
   # There is a vigra header ./include/vigra/promote_traits.hxx.py
