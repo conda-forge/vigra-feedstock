@@ -41,7 +41,7 @@ megabuild:
 numpy:
 - '2'
 openexr:
-- '3.3'
+- '3.4'
 pin_run_as_build:
   python:
     min_pin: x.x
