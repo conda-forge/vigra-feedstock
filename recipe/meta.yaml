@@ -12,7 +12,7 @@ source:
     - numpy2.4_compatibility.patch
 
 build:
-  number: 7
+  number: 8
   detect_binary_files_with_prefix: true
   # There is a vigra header ./include/vigra/promote_traits.hxx.py
   # That doesn't have a meaningful pyc compilation since this is supposed
