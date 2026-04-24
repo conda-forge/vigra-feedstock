@@ -23,9 +23,9 @@ hdf5:
 imath:
 - 3.2.2
 libboost_devel:
-- '1.88'
+- '1.90'
 libboost_python_devel:
-- '1.88'
+- '1.90'
 libjpeg_turbo:
 - '3'
 libpng:
