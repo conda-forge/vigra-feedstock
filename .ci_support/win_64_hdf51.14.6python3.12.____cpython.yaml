@@ -13,7 +13,7 @@ fftw:
 hdf5:
 - 1.14.6
 imath:
-- 3.2.2
+- 3.2.3
 libboost_devel:
 - '1.90'
 libboost_python_devel:
