@@ -1,0 +1,56 @@
+From 0729e083f575ecc73a2365db2c78dabcb6fcafeb Mon Sep 17 00:00:00 2001
+From: Mark Harfouche <mark.harfouche@gmail.com>
+Date: Sun, 4 Oct 2026 09:42:01 -0400
+Subject: [PATCH] Only require the Python Development.Module component
+
+vigranumpy builds extension modules and never embeds the interpreter, so
+it does not need libpython (Development.Embed). Python 3.15 as packaged
+by conda-forge no longer ships libpython alongside the interpreter, which
+made FindPython report Development as missing and vigranumpy be silently
+skipped.
+
+Python_LIBRARIES is empty on unix when only Development.Module is
+requested, so it can no longer be a required variable.
+---
+ CMakeLists.txt                           | 2 +-
+ config/FindVIGRANUMPY_DEPENDENCIES.cmake | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 493cbd7..71b76cd 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -188,7 +188,7 @@ include(VigraDetectThreading)
+ include(VigraConfigureThreading)
+ 
+ IF(WITH_VIGRANUMPY)
+-    FIND_PACKAGE(Python COMPONENTS Interpreter Development NumPy)
++    FIND_PACKAGE(Python COMPONENTS Interpreter Development.Module NumPy)
+     FIND_PACKAGE(VIGRANUMPY_DEPENDENCIES)
+ ENDIF()
+ 
+diff --git a/config/FindVIGRANUMPY_DEPENDENCIES.cmake b/config/FindVIGRANUMPY_DEPENDENCIES.cmake
+index 9e27684..83f2d45 100644
+--- a/config/FindVIGRANUMPY_DEPENDENCIES.cmake
++++ b/config/FindVIGRANUMPY_DEPENDENCIES.cmake
+@@ -3,7 +3,7 @@
+ MESSAGE(STATUS "Checking VIGRANUMPY_DEPENDENCIES")
+ 
+ IF(NOT Python_Interpreter_FOUND)
+-    FIND_PACKAGE(Python COMPONENTS Interpreter Development NumPy)
++    FIND_PACKAGE(Python COMPONENTS Interpreter Development.Module NumPy)
+ ENDIF()
+ 
+ IF(Python_Interpreter_FOUND)
+@@ -137,7 +137,7 @@ IF(Python_Interpreter_FOUND)
+     ######################################################################
+     INCLUDE(FindPackageHandleStandardArgs)
+     FIND_PACKAGE_HANDLE_STANDARD_ARGS(VIGRANUMPY_DEPENDENCIES DEFAULT_MSG
+-                         Python_Interpreter_FOUND Python_INCLUDE_DIRS Python_LIBRARIES
++                         Python_Interpreter_FOUND Python_INCLUDE_DIRS
+                          Boost_PYTHON_LIBRARY Python_NumPy_INCLUDE_DIRS VIGRANUMPY_INSTALL_DIR)
+ 
+     IF(NOT VIGRANUMPY_INCLUDE_DIRS OR VIGRANUMPY_INCLUDE_DIRS MATCHES "-NOTFOUND")
+-- 
+2.56.0
+
