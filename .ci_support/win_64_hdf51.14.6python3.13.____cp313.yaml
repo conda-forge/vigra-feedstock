@@ -44,5 +44,8 @@ target_platform:
 - win-64
 vigra:
 - '1.12'
+zip_keys:
+- - python
+  - channel_sources
 zlib:
 - '1'
